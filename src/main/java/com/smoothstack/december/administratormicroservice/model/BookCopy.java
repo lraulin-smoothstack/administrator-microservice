@@ -1,4 +1,4 @@
-package com.smoothstack.december.administratormicroservice.models;
+package com.smoothstack.december.administratormicroservice.model;
 
 import java.util.Objects;
 

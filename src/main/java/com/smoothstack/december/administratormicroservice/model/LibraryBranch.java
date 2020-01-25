@@ -1,11 +1,10 @@
-package com.smoothstack.december.administratormicroservice.models;
+package com.smoothstack.december.administratormicroservice.model;
 
-public class Borrower {
+public class LibraryBranch {
 
     private Long id;
     private String name;
     private String address;
-    private String phoneNumber;
 
     public Long getId() {
         return this.id;
@@ -29,14 +28,6 @@ public class Borrower {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
 }
