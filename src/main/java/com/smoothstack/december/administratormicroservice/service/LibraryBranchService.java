@@ -23,11 +23,11 @@ public class LibraryBranchService {
         return LibraryBranchDAO.findAll();
     }
 
-    public LibraryBranch setLibraryBranch(LibraryBranch LibraryBranch) {
-        return LibraryBranchDAO.save(LibraryBranch);
+    public LibraryBranch setLibraryBranch(LibraryBranch libraryBranch) {
+        return LibraryBranchDAO.save(libraryBranch);
     }
 
-    public void deleteLibraryBranch(LibraryBranch LibraryBranch) {
-        LibraryBranchDAO.delete(LibraryBranch);
+    public void deleteLibraryBranch(LibraryBranch libraryBranch) {
+        LibraryBranchDAO.delete(libraryBranch);
     }
 }

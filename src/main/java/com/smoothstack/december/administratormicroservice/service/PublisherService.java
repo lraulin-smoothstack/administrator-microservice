@@ -24,11 +24,11 @@ public class PublisherService {
         return PublisherDAO.findAll();
     }
 
-    public Publisher setPublisher(Publisher Publisher) {
-        return PublisherDAO.save(Publisher);
+    public Publisher setPublisher(Publisher publisher) {
+        return PublisherDAO.save(publisher);
     }
 
-    public void deletePublisher(Publisher Publisher) {
-        PublisherDAO.delete(Publisher);
+    public void deletePublisher(Publisher publisher) {
+        PublisherDAO.delete(publisher);
     }
 }
