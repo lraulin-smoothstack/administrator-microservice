@@ -1,28 +1,34 @@
 package com.smoothstack.december.administratormicroservice.service;
 
 import com.smoothstack.december.administratormicroservice.dao.BookDAO;
+import com.smoothstack.december.administratormicroservice.entity.Author;
 import com.smoothstack.december.administratormicroservice.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class BookService {
     @Autowired
-    private BookDAO BookDAO;
+    private BookDAO bookDAO;
+
+    public Optional<Book> getBook(long id) {
+        return bookDAO.findById(id);
+    }
 
     public List<Book> getBooks() {
-        return BookDAO.findAll();
+        return bookDAO.findAll();
     }
 
     public Book setBook(Book Book) {
-        return BookDAO.save(Book);
+        return bookDAO.save(Book);
     }
 
     public void deleteBook(Book Book) {
-        BookDAO.delete(Book);
+        bookDAO.delete(Book);
     }
 }

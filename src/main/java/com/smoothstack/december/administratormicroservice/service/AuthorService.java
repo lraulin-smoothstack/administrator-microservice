@@ -7,12 +7,17 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class AuthorService {
     @Autowired
     private AuthorDAO authorDAO;
+
+    public Optional<Author> getAuthor(long id) {
+        return authorDAO.findById(id);
+    }
 
     public List<Author> getAuthors() {
         return authorDAO.findAll();
