@@ -1,54 +1,58 @@
 package com.smoothstack.december.administratormicroservice.entity;
 
-import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Publisher {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String name;
+
+    @Column
     private String address;
+
+    @Column
     private String phoneNumber;
-    private Set<Book> books = new HashSet<>();
 
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    @OneToMany(mappedBy = "publishers")
+    private Set<Book> books;
 
     public String getPhoneNumber() {
-        return this.phoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Book> getBooks() {
-        return this.books;
+    public String getAddress() {
+        return address;
     }
 
-    public void setBooks(Set<Book> books) {
-        this.books = books;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

@@ -20,7 +20,7 @@ public class LibraryBranchController {
     @Autowired
     private LibraryBranchService libraryBranchService;
 
-    @PostMapping("/libraryBranch/{id}")
+    @PutMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> createLibraryBranch(@PathVariable long id, @RequestBody LibraryBranch libraryBranch){
         LibraryBranch response = null;
 
@@ -68,11 +68,11 @@ public class LibraryBranchController {
 //            logger.error(exception.toString());
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/libraryBranch/{id}")
-    public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable long id){
+    public ResponseEntity<LibraryBranch> deleteLibraryBranch(@PathVariable long id){
         try {
             Optional<LibraryBranch> libraryBranch = libraryBranchService.getLibraryBranch(id);
             libraryBranch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

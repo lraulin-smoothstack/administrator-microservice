@@ -20,7 +20,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/book/{id}")
+    @PutMapping("/book/{id}")
     public ResponseEntity<Book> createBook(@PathVariable long id, @RequestBody Book book){
         Book response = null;
 
@@ -68,11 +68,11 @@ public class BookController {
 //            logger.error(exception.toString());
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/book/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable long id){
+    public ResponseEntity<Book> deleteBook(@PathVariable long id){
         try {
             Optional<Book> book = bookService.getBook(id);
             book.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

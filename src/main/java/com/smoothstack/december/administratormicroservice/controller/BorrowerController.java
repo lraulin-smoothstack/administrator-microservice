@@ -20,7 +20,7 @@ public class BorrowerController {
     @Autowired
     private BorrowerService borrowerService;
 
-    @PostMapping("/borrower/{id}")
+    @PutMapping("/borrower/{id}")
     public ResponseEntity<Borrower> createBorrower(@PathVariable long id, @RequestBody Borrower borrower){
         Borrower response = null;
 
@@ -68,11 +68,11 @@ public class BorrowerController {
 //            logger.error(exception.toString());
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/borrower/{id}")
-    public ResponseEntity<Borrower> updateBorrower(@PathVariable long id){
+    public ResponseEntity<Borrower> deleteBorrower(@PathVariable long id){
         try {
             Optional<Borrower> borrower = borrowerService.getBorrower(id);
             borrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
