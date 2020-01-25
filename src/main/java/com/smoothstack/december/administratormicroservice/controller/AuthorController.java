@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/lms/administrator-service")
@@ -33,7 +34,7 @@ public class AuthorController {
 //            logger.error(exception.toString());
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/authors")
@@ -56,7 +57,8 @@ public class AuthorController {
         Author response = null;
 
         try {
-            Author oldAuthor = authorService.get
+            Optional<Author> oldAuthor = authorService.getAuthor(id);
+            oldAuthor.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             response = authorService.setAuthor(author);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
@@ -71,10 +73,10 @@ public class AuthorController {
 
     @DeleteMapping("/author/{id}")
     public ResponseEntity<Author> updateAuthor(@PathVariable long id){
-        Author response = null;
-
         try {
-            response = authorService.setAuthor(author);
+            Optional<Author> author = authorService.getAuthor(id);
+            author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            authorService.deleteAuthor(author.get());
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
@@ -83,6 +85,6 @@ public class AuthorController {
 //            logger.error(exception.toString());
         }
 
-        return new ResponseEntity<Author>(response, HttpStatus.OK)
+        return new ResponseEntity<Author>((Author) null, HttpStatus.OK);
     }
 }

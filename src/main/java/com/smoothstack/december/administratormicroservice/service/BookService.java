@@ -25,10 +25,10 @@ public class BookService {
     }
 
     public Book setBook(Book Book) {
-        return bookDAO.save(Book);
+        return bookDAO.save(book);
     }
 
-    public void deleteBook(Book Book) {
-        bookDAO.delete(Book);
+    public void deleteBook(Book book) {
+        bookDAO.delete(book);
     }
 }
