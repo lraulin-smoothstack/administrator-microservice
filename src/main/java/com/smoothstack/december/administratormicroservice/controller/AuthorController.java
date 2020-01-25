@@ -20,7 +20,7 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @PostMapping("/author/{id}")
+    @PutMapping("/author/{id}")
     public ResponseEntity<Author> createAuthor(@PathVariable long id, @RequestBody Author author){
         Author response = null;
 
@@ -68,11 +68,11 @@ public class AuthorController {
 //            logger.error(exception.toString());
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/author/{id}")
-    public ResponseEntity<Author> updateAuthor(@PathVariable long id){
+    public ResponseEntity<Author> deleteAuthor(@PathVariable long id){
         try {
             Optional<Author> author = authorService.getAuthor(id);
             author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

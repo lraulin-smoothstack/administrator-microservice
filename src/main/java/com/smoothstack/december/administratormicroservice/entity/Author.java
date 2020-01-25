@@ -3,14 +3,31 @@ package com.smoothstack.december.administratormicroservice.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Author {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String name;
+
+    @ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -18,7 +35,7 @@ public class Author {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -26,7 +43,7 @@ public class Author {
     }
 
     public Set<Book> getBooks() {
-        return this.books;
+        return books;
     }
 
     public void setBooks(Set<Book> books) {

@@ -20,7 +20,7 @@ public class PublisherController {
     @Autowired
     private PublisherService publisherService;
 
-    @PostMapping("/publisher/{id}")
+    @PutMapping("/publisher/{id}")
     public ResponseEntity<Publisher> createPublisher(@PathVariable long id, @RequestBody Publisher publisher){
         Publisher response = null;
 
@@ -68,11 +68,11 @@ public class PublisherController {
 //            logger.error(exception.toString());
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/publisher/{id}")
-    public ResponseEntity<Publisher> updatePublisher(@PathVariable long id){
+    public ResponseEntity<Publisher> deletePublisher(@PathVariable long id){
         try {
             Optional<Publisher> publisher = publisherService.getPublisher(id);
             publisher.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

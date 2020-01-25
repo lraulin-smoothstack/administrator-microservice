@@ -24,7 +24,7 @@ public class BookService {
         return bookDAO.findAll();
     }
 
-    public Book setBook(Book Book) {
+    public Book setBook(Book book) {
         return bookDAO.save(book);
     }
 
