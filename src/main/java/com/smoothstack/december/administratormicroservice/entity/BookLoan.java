@@ -1,4 +1,4 @@
-package com.smoothstack.december.administratormicroservice.model;
+package com.smoothstack.december.administratormicroservice.entity;
 
 import java.time.LocalDate;
 import java.util.Objects;;

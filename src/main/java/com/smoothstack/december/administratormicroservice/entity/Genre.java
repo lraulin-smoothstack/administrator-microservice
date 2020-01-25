@@ -1,9 +1,9 @@
-package com.smoothstack.december.administratormicroservice.model;
+package com.smoothstack.december.administratormicroservice.entity;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Author {
+public class Genre {
 
     private Long id;
     private String name;

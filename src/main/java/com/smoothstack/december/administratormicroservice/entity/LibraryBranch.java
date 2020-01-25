@@ -1,4 +1,4 @@
-package com.smoothstack.december.administratormicroservice.model;
+package com.smoothstack.december.administratormicroservice.entity;
 
 public class LibraryBranch {
 

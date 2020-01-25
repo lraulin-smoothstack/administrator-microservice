@@ -1,11 +1,15 @@
-package com.smoothstack.december.administratormicroservice.model;
+package com.smoothstack.december.administratormicroservice.entity;
 
-public class Borrower {
+import java.util.HashSet;
+import java.util.Set;
+
+public class Publisher {
 
     private Long id;
     private String name;
     private String address;
     private String phoneNumber;
+    private Set<Book> books = new HashSet<>();
 
     public Long getId() {
         return this.id;
@@ -37,6 +41,14 @@ public class Borrower {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Set<Book> getBooks() {
+        return this.books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
 }
