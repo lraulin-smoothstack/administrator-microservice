@@ -62,12 +62,12 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @PutMapping("/bookLoan/{id}")
-    public ResponseEntity<BookLoan> updateBookLoan(@PathVariable long id, @RequestBody BookLoan bookLoan){
+    @PutMapping("/bookLoan")
+    public ResponseEntity<BookLoan> updateBookLoan(@RequestBody BookLoan bookLoan){
         BookLoan response = null;
 
         try {
-            Optional<BookLoan> oldBookLoan = bookLoanService.getBookLoan(id);
+            Optional<BookLoan> oldBookLoan = bookLoanService.getBookLoan(bookLoan.getId());
             oldBookLoan.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             response = bookLoanService.setBookLoan(bookLoan);
             logger.debug(response);
@@ -84,12 +84,12 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @DeleteMapping("/bookLoan/{id}")
-    public ResponseEntity<BookLoan> deleteBookLoan(@PathVariable long id){
+    @DeleteMapping("/bookLoan")
+    public ResponseEntity<BookLoan> deleteBookLoan(@RequestBody BookLoan bookLoan){
         try {
-            Optional<BookLoan> bookLoan = bookLoanService.getBookLoan(id);
-            bookLoan.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            bookLoanService.deleteBookLoan(bookLoan.get());
+            Optional<BookLoan> oldBookLoan = bookLoanService.getBookLoan(bookLoan.getId());
+            oldBookLoan.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            bookLoanService.deleteBookLoan(oldBookLoan.get());
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
