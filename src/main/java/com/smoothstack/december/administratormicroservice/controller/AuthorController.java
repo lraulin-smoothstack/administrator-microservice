@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,15 +30,7 @@ public class AuthorController {
     public ResponseEntity<Author> createAuthor(@RequestBody Author author){
         Author response = null;
 
-        try {
-            response = authorService.setAuthor(author);
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ItemNotFoundException(illegalRelationReferenceException.getMessage());
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
+        response = authorService.setAuthor(author);
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -50,14 +41,8 @@ public class AuthorController {
     public ResponseEntity<List<Author>> readAuthors() {
         List<Author> response = null;
 
-        try {
-            response = authorService.getAuthors();
-            logger.debug(response);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ItemNotFoundException(illegalRelationReferenceException.getMessage());
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
+        response = authorService.getAuthors();
+        logger.debug(response);
 
         ResponseEntity<List<Author>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -68,15 +53,9 @@ public class AuthorController {
     public ResponseEntity<Author> readAuthorById(@PathVariable long id) {
         Optional<Author> response = null;
 
-        try {
             response = authorService.getAuthor(id);
             response.orElseThrow(()->new ItemNotFoundException("No author with id " + id));
             logger.debug(response.get());
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ItemNotFoundException(illegalRelationReferenceException.getMessage());
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response.get(), HttpStatus.OK);
         logger.debug(responseEntity);
@@ -87,18 +66,10 @@ public class AuthorController {
     public ResponseEntity<Author> updateAuthor(@PathVariable long id, @RequestBody Author author){
         Author response = null;
 
-        try {
-            Optional<Author> oldAuthor = authorService.getAuthor(id);
-            oldAuthor.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            response = authorService.setAuthor(author);
-            logger.debug(response);
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
+        Optional<Author> oldAuthor = authorService.getAuthor(id);
+        oldAuthor.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        response = authorService.setAuthor(author);
+        logger.debug(response);
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -107,17 +78,9 @@ public class AuthorController {
 
     @DeleteMapping(path = "/author/{id}")
     public ResponseEntity<Author> deleteAuthor(@PathVariable long id){
-        try {
-            Optional<Author> author = authorService.getAuthor(id);
-            author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            authorService.deleteAuthor(author.get());
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
+        Optional<Author> author = authorService.getAuthor(id);
+        author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        authorService.deleteAuthor(author.get());
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);

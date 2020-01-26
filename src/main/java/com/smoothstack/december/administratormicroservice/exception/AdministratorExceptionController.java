@@ -9,6 +9,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class AdministratorExceptionController {
     @ExceptionHandler(value=ArgumentMissingException.class)
     public ResponseEntity<Object> exception(ArgumentMissingException exception) {
-        return new ResponseEntity<>("Item not found", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value=IllegalRelationReferenceException.class)
+    public ResponseEntity<Object> exception(IllegalRelationReferenceException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value=ResourceAlreadyExistsException.class)
+    public ResponseEntity<Object> exception(ResourceAlreadyExistsException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
