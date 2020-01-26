@@ -20,8 +20,8 @@ public class LibraryBranchController {
     @Autowired
     private LibraryBranchService libraryBranchService;
 
-    @PutMapping("/libraryBranch/{id}")
-    public ResponseEntity<LibraryBranch> createLibraryBranch(@PathVariable long id, @RequestBody LibraryBranch libraryBranch){
+    @PostMapping("/libraryBranch")
+    public ResponseEntity<LibraryBranch> createLibraryBranch(@RequestBody LibraryBranch libraryBranch){
         LibraryBranch response = null;
 
         try {
@@ -52,7 +52,7 @@ public class LibraryBranchController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/libraryBranch/{id}")
+    @PutMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable long id, @RequestBody LibraryBranch libraryBranch){
         LibraryBranch response = null;
 

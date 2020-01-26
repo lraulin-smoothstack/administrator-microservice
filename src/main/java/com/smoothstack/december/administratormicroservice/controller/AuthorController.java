@@ -20,8 +20,8 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @PutMapping("/author/{id}")
-    public ResponseEntity<Author> createAuthor(@PathVariable long id, @RequestBody Author author){
+    @PostMapping("/authors")
+    public ResponseEntity<Author> createAuthor(@RequestBody Author author){
         Author response = null;
 
         try {
@@ -52,7 +52,7 @@ public class AuthorController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/author/{id}")
+    @PutMapping("/author/{id}")
     public ResponseEntity<Author> updateAuthor(@PathVariable long id, @RequestBody Author author){
         Author response = null;
 

@@ -20,8 +20,8 @@ public class BorrowerController {
     @Autowired
     private BorrowerService borrowerService;
 
-    @PutMapping("/borrower/{id}")
-    public ResponseEntity<Borrower> createBorrower(@PathVariable long id, @RequestBody Borrower borrower){
+    @PostMapping("/borrower")
+    public ResponseEntity<Borrower> createBorrower(@RequestBody Borrower borrower){
         Borrower response = null;
 
         try {
@@ -52,7 +52,7 @@ public class BorrowerController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/borrower/{id}")
+    @PutMapping("/borrower/{id}")
     public ResponseEntity<Borrower> updateBorrower(@PathVariable long id, @RequestBody Borrower borrower){
         Borrower response = null;
 

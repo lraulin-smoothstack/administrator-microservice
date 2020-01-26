@@ -20,8 +20,8 @@ public class PublisherController {
     @Autowired
     private PublisherService publisherService;
 
-    @PutMapping("/publisher/{id}")
-    public ResponseEntity<Publisher> createPublisher(@PathVariable long id, @RequestBody Publisher publisher){
+    @PostMapping("/publisher")
+    public ResponseEntity<Publisher> createPublisher(@RequestBody Publisher publisher){
         Publisher response = null;
 
         try {
@@ -52,7 +52,7 @@ public class PublisherController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/publisher/{id}")
+    @PutMapping("/publisher/{id}")
     public ResponseEntity<Publisher> updatePublisher(@PathVariable long id, @RequestBody Publisher publisher){
         Publisher response = null;
 
