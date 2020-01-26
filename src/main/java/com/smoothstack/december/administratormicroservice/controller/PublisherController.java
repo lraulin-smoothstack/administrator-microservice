@@ -1,9 +1,12 @@
 package com.smoothstack.december.administratormicroservice.controller;
 
+import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
 import com.smoothstack.december.administratormicroservice.entity.Publisher;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import com.smoothstack.december.administratormicroservice.service.PublisherService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/v1/lms/administrator-service")
 public class PublisherController {
+    private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
 
     @Autowired
     private PublisherService publisherService;

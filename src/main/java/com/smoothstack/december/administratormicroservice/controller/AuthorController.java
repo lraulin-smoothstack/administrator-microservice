@@ -1,9 +1,12 @@
 package com.smoothstack.december.administratormicroservice.controller;
 
+import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
 import com.smoothstack.december.administratormicroservice.entity.Author;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import com.smoothstack.december.administratormicroservice.service.AuthorService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,8 @@ import java.util.Optional;
 @RequestMapping("/v1/lms/administrator-service")
 public class AuthorController {
 
+    private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
+
     @Autowired
     private AuthorService authorService;
 
@@ -25,7 +30,9 @@ public class AuthorController {
         Author response = null;
 
         try {
+            logger.debug(author);
             response = authorService.setAuthor(author);
+            logger.debug(response);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
@@ -43,6 +50,7 @@ public class AuthorController {
 
         try {
             response = authorService.getAuthors();
+            logger.debug(response);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
@@ -60,6 +68,7 @@ public class AuthorController {
             Optional<Author> oldAuthor = authorService.getAuthor(id);
             oldAuthor.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             response = authorService.setAuthor(author);
+            logger.debug(response);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
