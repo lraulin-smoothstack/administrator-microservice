@@ -54,7 +54,7 @@ public class AuthorController {
         Optional<Author> response = null;
 
             response = authorService.getAuthor(id);
-            response.orElseThrow(()->new ItemNotFoundException("No author with id " + id));
+            response.orElseThrow(()->new IllegalRelationReferenceException("oops!"));
             logger.debug(response.get());
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response.get(), HttpStatus.OK);
