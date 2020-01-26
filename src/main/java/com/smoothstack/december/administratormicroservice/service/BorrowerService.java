@@ -2,9 +2,7 @@ package com.smoothstack.december.administratormicroservice.service;
 
 import com.smoothstack.december.administratormicroservice.dao.BookLoanDAO;
 import com.smoothstack.december.administratormicroservice.dao.BorrowerDAO;
-import com.smoothstack.december.administratormicroservice.entity.Book;
 import com.smoothstack.december.administratormicroservice.entity.BookLoan;
-import com.smoothstack.december.administratormicroservice.entity.BookLoanId;
 import com.smoothstack.december.administratormicroservice.entity.Borrower;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +36,7 @@ public class BorrowerService {
         BorrowerDAO.delete(Borrower);
     }
 
-    public Optional<BookLoan> getBookLoan(BookLoanId id) {
+    public Optional<BookLoan> getBookLoan(BookLoan.BookLoanId id) {
         return bookLoanDAO.findById(id);
     }
 

@@ -8,7 +8,6 @@ import com.smoothstack.december.administratormicroservice.exception.ItemNotFound
 import com.smoothstack.december.administratormicroservice.service.AuthorService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,7 +36,7 @@ public class AuthorController {
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(illegalRelationReferenceException.getMessage());
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -55,7 +54,7 @@ public class AuthorController {
             response = authorService.getAuthors();
             logger.debug(response);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(illegalRelationReferenceException.getMessage());
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -71,9 +70,10 @@ public class AuthorController {
 
         try {
             response = authorService.getAuthor(id);
-            response.orElseThrow(()->new ItemNotFoundException());
+            response.orElseThrow(()->new ItemNotFoundException("No author with id " + id));
+            logger.debug(response.get());
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(illegalRelationReferenceException.getMessage());
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -95,7 +95,7 @@ public class AuthorController {
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ItemNotFoundException();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -114,7 +114,7 @@ public class AuthorController {
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ItemNotFoundException();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }

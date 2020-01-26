@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice()
 public class AdministratorExceptionController {
-    @ExceptionHandler(value=ItemNotFoundException.class)
-    public ResponseEntity<Object> exception(ItemNotFoundException exception) {
+    @ExceptionHandler(value=ArgumentMissingException.class)
+    public ResponseEntity<Object> exception(ArgumentMissingException exception) {
         return new ResponseEntity<>("Item not found", HttpStatus.NOT_FOUND);
     }
 }
