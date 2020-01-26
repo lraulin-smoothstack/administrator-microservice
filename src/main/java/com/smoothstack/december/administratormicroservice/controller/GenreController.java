@@ -1,11 +1,10 @@
 package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
-import com.smoothstack.december.administratormicroservice.entity.LibraryBranch;
-import com.smoothstack.december.administratormicroservice.entity.Publisher;
+import com.smoothstack.december.administratormicroservice.entity.Genre;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
-import com.smoothstack.december.administratormicroservice.service.PublisherService;
+import com.smoothstack.december.administratormicroservice.service.GenreService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +18,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/lms/administrator-service")
-public class PublisherController {
+public class GenreController {
+
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
 
     @Autowired
-    private PublisherService publisherService;
+    private GenreService genreService;
 
-    @PostMapping("/publishers")
-    public ResponseEntity<Publisher> createPublisher(@RequestBody Publisher publisher){
-        Publisher response = null;
+    @PostMapping("/genres")
+    public ResponseEntity<Genre> createGenre(@RequestBody Genre genre){
+        Genre response = null;
 
         try {
-            response = publisherService.setPublisher(publisher);
+            response = genreService.setGenre(genre);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
@@ -39,36 +39,38 @@ public class PublisherController {
             logger.error(exception);
         }
 
-        ResponseEntity<Publisher> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
 
-    @GetMapping("/publishers")
-    public ResponseEntity<List<Publisher>> readPublishers() {
-        List<Publisher> response = null;
+    @GetMapping("/genres")
+    public ResponseEntity<List<Genre>> readGenres() {
+        List<Genre> response = null;
 
         try {
-            response = publisherService.getPublishers();
+            response = genreService.getGenres();
+            logger.debug(response);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
 
-        ResponseEntity<List<Publisher>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<List<Genre>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
 
-    @PutMapping("/publisher/{id}")
-    public ResponseEntity<Publisher> updatePublisher(@PathVariable long id, @RequestBody Publisher publisher){
-        Publisher response = null;
+    @PutMapping("/genre/{id}")
+    public ResponseEntity<Genre> updateGenre(@PathVariable long id, @RequestBody Genre genre){
+        Genre response = null;
 
         try {
-            Optional<Publisher> oldPublisher = publisherService.getPublisher(id);
-            oldPublisher.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            response = publisherService.setPublisher(publisher);
+            Optional<Genre> oldGenre = genreService.getGenre(id);
+            oldGenre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            response = genreService.setGenre(genre);
+            logger.debug(response);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
@@ -77,17 +79,17 @@ public class PublisherController {
             logger.error(exception);
         }
 
-        ResponseEntity<Publisher> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
 
-    @DeleteMapping("/publisher/{id}")
-    public ResponseEntity<Publisher> deletePublisher(@PathVariable long id){
+    @DeleteMapping("/genre/{id}")
+    public ResponseEntity<Genre> deleteGenre(@PathVariable long id){
         try {
-            Optional<Publisher> publisher = publisherService.getPublisher(id);
-            publisher.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            publisherService.deletePublisher(publisher.get());
+            Optional<Genre> genre = genreService.getGenre(id);
+            genre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            genreService.deleteGenre(genre.get());
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
@@ -96,7 +98,7 @@ public class PublisherController {
             logger.error(exception);
         }
 
-        ResponseEntity<Publisher> responseEntity = new ResponseEntity<>((Publisher)null, HttpStatus.OK);
+        ResponseEntity<Genre> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }

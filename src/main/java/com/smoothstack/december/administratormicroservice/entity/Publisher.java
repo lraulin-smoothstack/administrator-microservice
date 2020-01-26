@@ -20,7 +20,7 @@ public class Publisher {
     @Column
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "publishers")
+    @OneToMany(mappedBy = "publisher")
     private Set<Book> books;
 
     public String getPhoneNumber() {
