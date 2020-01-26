@@ -2,7 +2,6 @@ package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
 import com.smoothstack.december.administratormicroservice.entity.Author;
-import com.smoothstack.december.administratormicroservice.entity.Book;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import com.smoothstack.december.administratormicroservice.service.AuthorService;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1/lms/administrator-service")
+@RequestMapping(value = "/v1/lms/administrator-service", produces = {"application/json", "application/xml"})
 public class AuthorController {
 
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
@@ -26,7 +25,7 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @PostMapping("/authors")
+    @PostMapping(path = "/authors", produces = {"application/json", "application/xml"})
     public ResponseEntity<Author> createAuthor(@RequestBody Author author){
         Author response = null;
 
@@ -45,7 +44,7 @@ public class AuthorController {
         return responseEntity;
     }
 
-    @GetMapping("/authors")
+    @GetMapping(path = "/authors", produces = {"application/json", "application/xml"})
     public ResponseEntity<List<Author>> readAuthors() {
         List<Author> response = null;
 
@@ -63,7 +62,7 @@ public class AuthorController {
         return responseEntity;
     }
 
-    @PutMapping("/author/{id}")
+    @PutMapping(path = "/author/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Author> updateAuthor(@PathVariable long id, @RequestBody Author author){
         Author response = null;
 
@@ -85,7 +84,7 @@ public class AuthorController {
         return responseEntity;
     }
 
-    @DeleteMapping("/author/{id}")
+    @DeleteMapping(path = "/author/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Author> deleteAuthor(@PathVariable long id){
         try {
             Optional<Author> author = authorService.getAuthor(id);

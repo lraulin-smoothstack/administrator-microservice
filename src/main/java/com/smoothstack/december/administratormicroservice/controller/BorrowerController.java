@@ -24,7 +24,7 @@ public class BorrowerController {
     @Autowired
     private BorrowerService borrowerService;
 
-    @PostMapping("/borrower")
+    @PostMapping(path = "/borrower", produces = {"application/json", "application/xml"})
     public ResponseEntity<Borrower> createBorrower(@RequestBody Borrower borrower){
         Borrower response = null;
 
@@ -43,7 +43,7 @@ public class BorrowerController {
         return responseEntity;
     }
 
-    @GetMapping("/borrowers")
+    @GetMapping(path = "/borrowers", produces = {"application/json", "application/xml"})
     public ResponseEntity<List<Borrower>> readBorrowers() {
         List<Borrower> response = null;
 
@@ -60,7 +60,7 @@ public class BorrowerController {
         return responseEntity;
     }
 
-    @PutMapping("/borrower/{id}")
+    @PutMapping(path = "/borrower/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Borrower> updateBorrower(@PathVariable long id, @RequestBody Borrower borrower){
         Borrower response = null;
 
@@ -80,7 +80,7 @@ public class BorrowerController {
         return responseEntity;
     }
 
-    @DeleteMapping("/borrower/{id}")
+    @DeleteMapping(path = "/borrower/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Borrower> deleteBorrower(@PathVariable long id){
         try {
             Optional<Borrower> borrower = borrowerService.getBorrower(id);

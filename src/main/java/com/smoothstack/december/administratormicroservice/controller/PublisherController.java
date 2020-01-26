@@ -25,7 +25,7 @@ public class PublisherController {
     @Autowired
     private PublisherService publisherService;
 
-    @PostMapping("/publishers")
+    @PostMapping(path = "/publishers", produces = {"application/json", "application/xml"})
     public ResponseEntity<Publisher> createPublisher(@RequestBody Publisher publisher){
         Publisher response = null;
 
@@ -44,7 +44,7 @@ public class PublisherController {
         return responseEntity;
     }
 
-    @GetMapping("/publishers")
+    @GetMapping(path = "/publishers", produces = {"application/json", "application/xml"})
     public ResponseEntity<List<Publisher>> readPublishers() {
         List<Publisher> response = null;
 
@@ -61,7 +61,7 @@ public class PublisherController {
         return responseEntity;
     }
 
-    @PutMapping("/publisher/{id}")
+    @PutMapping(path = "/publisher/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Publisher> updatePublisher(@PathVariable long id, @RequestBody Publisher publisher){
         Publisher response = null;
 
@@ -82,7 +82,7 @@ public class PublisherController {
         return responseEntity;
     }
 
-    @DeleteMapping("/publisher/{id}")
+    @DeleteMapping(path = "/publisher/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Publisher> deletePublisher(@PathVariable long id){
         try {
             Optional<Publisher> publisher = publisherService.getPublisher(id);

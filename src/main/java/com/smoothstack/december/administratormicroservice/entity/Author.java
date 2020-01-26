@@ -26,6 +26,17 @@ public class Author {
     @ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
 
+    public Author() {};
+
+    public Author(String name) {
+        this.name = name;
+    }
+
+    public Author(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

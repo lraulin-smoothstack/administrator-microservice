@@ -25,7 +25,7 @@ public class GenreController {
     @Autowired
     private GenreService genreService;
 
-    @PostMapping("/genres")
+    @PostMapping(path = "/genres", produces = {"application/json", "application/xml"})
     public ResponseEntity<Genre> createGenre(@RequestBody Genre genre){
         Genre response = null;
 
@@ -44,7 +44,7 @@ public class GenreController {
         return responseEntity;
     }
 
-    @GetMapping("/genres")
+    @GetMapping(path = "/genres", produces = {"application/json", "application/xml"})
     public ResponseEntity<List<Genre>> readGenres() {
         List<Genre> response = null;
 
@@ -62,7 +62,7 @@ public class GenreController {
         return responseEntity;
     }
 
-    @PutMapping("/genre/{id}")
+    @PutMapping(path = "/genre/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Genre> updateGenre(@PathVariable long id, @RequestBody Genre genre){
         Genre response = null;
 
@@ -84,7 +84,7 @@ public class GenreController {
         return responseEntity;
     }
 
-    @DeleteMapping("/genre/{id}")
+    @DeleteMapping(path = "/genre/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Genre> deleteGenre(@PathVariable long id){
         try {
             Optional<Genre> genre = genreService.getGenre(id);

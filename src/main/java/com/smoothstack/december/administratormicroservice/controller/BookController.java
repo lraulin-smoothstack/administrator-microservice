@@ -25,7 +25,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/books")
+    @PostMapping(path = "/books", produces = {"application/json", "application/xml"})
     public ResponseEntity<Book> createBook(@RequestBody Book book){
         Book response = null;
 
@@ -42,7 +42,7 @@ public class BookController {
         return responseEntity;
     }
 
-    @GetMapping("/books")
+    @GetMapping(path = "/books", produces = {"application/json", "application/xml"})
     public ResponseEntity<List<Book>> readBooks() {
         List<Book> response = null;
 
@@ -60,7 +60,7 @@ public class BookController {
         return responseEntity;
     }
 
-    @PutMapping("/book/{id}")
+    @PutMapping(path = "/book/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Book> updateBook(@PathVariable long id, @RequestBody Book book){
         Book response = null;
 
@@ -81,7 +81,7 @@ public class BookController {
         return responseEntity;
     }
 
-    @DeleteMapping("/book/{id}")
+    @DeleteMapping(path = "/book/{id}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Book> deleteBook(@PathVariable long id){
         try {
             Optional<Book> book = bookService.getBook(id);
