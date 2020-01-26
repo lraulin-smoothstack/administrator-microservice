@@ -22,11 +22,19 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "publisher_id", nullable = false)
-    private Publisher publishers;
+    private Publisher publisher;
 
     @ManyToMany
     @JoinTable
     private Set<Genre> genres = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -44,12 +52,19 @@ public class Book {
         this.authors = authors;
     }
 
-    public Long getId() {
-        return id;
+    public Publisher getPublisher() {
+        return publisher;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
 }
