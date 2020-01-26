@@ -25,16 +25,18 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping(path = "/books", produces = {"application/json", "application/xml"})
-    public ResponseEntity<Book> createBook(@RequestBody Book book){
+    @PostMapping("/books")
+    public ResponseEntity<Book> createBook(@RequestBody Book book) {
         Book response = null;
 
         try {
             response = bookService.setBook(book);
         } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
+                    argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         }
 
         ResponseEntity<Book> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -42,7 +44,7 @@ public class BookController {
         return responseEntity;
     }
 
-    @GetMapping(path = "/books", produces = {"application/json", "application/xml"})
+    @GetMapping("/books")
     public ResponseEntity<List<Book>> readBooks() {
         List<Book> response = null;
 
@@ -50,7 +52,8 @@ public class BookController {
             response = bookService.getBooks();
             logger.debug(response);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -60,8 +63,8 @@ public class BookController {
         return responseEntity;
     }
 
-    @PutMapping(path = "/book/{id}", produces = {"application/json", "application/xml"})
-    public ResponseEntity<Book> updateBook(@PathVariable long id, @RequestBody Book book){
+    @PutMapping("/book/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable long id, @RequestBody Book book) {
         Book response = null;
 
         try {
@@ -69,9 +72,11 @@ public class BookController {
             oldBook.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             response = bookService.setBook(book);
         } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
+                    argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -81,16 +86,18 @@ public class BookController {
         return responseEntity;
     }
 
-    @DeleteMapping(path = "/book/{id}", produces = {"application/json", "application/xml"})
-    public ResponseEntity<Book> deleteBook(@PathVariable long id){
+    @DeleteMapping("/book/{id}")
+    public ResponseEntity<Book> deleteBook(@PathVariable long id) {
         try {
             Optional<Book> book = bookService.getBook(id);
             book.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             bookService.deleteBook(book.get());
         } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
+                    argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }

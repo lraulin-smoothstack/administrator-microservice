@@ -1,11 +1,10 @@
 package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
-import com.smoothstack.december.administratormicroservice.entity.LibraryBranch;
-import com.smoothstack.december.administratormicroservice.entity.Publisher;
+import com.smoothstack.december.administratormicroservice.entity.BookLoan;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
-import com.smoothstack.december.administratormicroservice.service.PublisherService;
+import com.smoothstack.december.administratormicroservice.service.BookLoanService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +17,20 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1/lms/administrator-service")
-public class PublisherController {
+@RequestMapping(value = "/v1/lms/administrator-service")
+public class BookLoanController {
+
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
 
     @Autowired
-    private PublisherService publisherService;
+    private BookLoanService bookLoanService;
 
-    @PostMapping(path = "/publishers", produces = {"application/json", "application/xml"})
-    public ResponseEntity<Publisher> createPublisher(@RequestBody Publisher publisher){
-        Publisher response = null;
+    @PostMapping("/bookLoans")
+    public ResponseEntity<BookLoan> createBookLoan(@RequestBody BookLoan bookLoan){
+        BookLoan response = null;
 
         try {
-            response = publisherService.setPublisher(publisher);
+            response = bookLoanService.setBookLoan(bookLoan);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
@@ -39,36 +39,38 @@ public class PublisherController {
             logger.error(exception);
         }
 
-        ResponseEntity<Publisher> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
 
-    @GetMapping(path = "/publishers", produces = {"application/json", "application/xml"})
-    public ResponseEntity<List<Publisher>> readPublishers() {
-        List<Publisher> response = null;
+    @GetMapping("/bookLoans")
+    public ResponseEntity<List<BookLoan>> readBookLoans() {
+        List<BookLoan> response = null;
 
         try {
-            response = publisherService.getPublishers();
+            response = bookLoanService.getBookLoans();
+            logger.debug(response);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
 
-        ResponseEntity<List<Publisher>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<List<BookLoan>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
 
-    @PutMapping(path = "/publisher/{id}", produces = {"application/json", "application/xml"})
-    public ResponseEntity<Publisher> updatePublisher(@PathVariable long id, @RequestBody Publisher publisher){
-        Publisher response = null;
+    @PutMapping("/bookLoan/{id}")
+    public ResponseEntity<BookLoan> updateBookLoan(@PathVariable long id, @RequestBody BookLoan bookLoan){
+        BookLoan response = null;
 
         try {
-            Optional<Publisher> oldPublisher = publisherService.getPublisher(id);
-            oldPublisher.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            response = publisherService.setPublisher(publisher);
+            Optional<BookLoan> oldBookLoan = bookLoanService.getBookLoan(id);
+            oldBookLoan.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            response = bookLoanService.setBookLoan(bookLoan);
+            logger.debug(response);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
@@ -77,17 +79,17 @@ public class PublisherController {
             logger.error(exception);
         }
 
-        ResponseEntity<Publisher> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
 
-    @DeleteMapping(path = "/publisher/{id}", produces = {"application/json", "application/xml"})
-    public ResponseEntity<Publisher> deletePublisher(@PathVariable long id){
+    @DeleteMapping("/bookLoan/{id}")
+    public ResponseEntity<BookLoan> deleteBookLoan(@PathVariable long id){
         try {
-            Optional<Publisher> publisher = publisherService.getPublisher(id);
-            publisher.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            publisherService.deletePublisher(publisher.get());
+            Optional<BookLoan> bookLoan = bookLoanService.getBookLoan(id);
+            bookLoan.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            bookLoanService.deleteBookLoan(bookLoan.get());
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
@@ -96,7 +98,7 @@ public class PublisherController {
             logger.error(exception);
         }
 
-        ResponseEntity<Publisher> responseEntity = new ResponseEntity<>((Publisher)null, HttpStatus.OK);
+        ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }

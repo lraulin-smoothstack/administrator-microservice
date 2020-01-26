@@ -25,7 +25,7 @@ public class LibraryBranchController {
     @Autowired
     private LibraryBranchService libraryBranchService;
 
-    @PostMapping(path = "/libraryBranch", produces = {"application/json", "application/xml"})
+    @PostMapping("/libraryBranch")
     public ResponseEntity<LibraryBranch> createLibraryBranch(@RequestBody LibraryBranch libraryBranch){
         LibraryBranch response = null;
 
@@ -44,7 +44,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @GetMapping(path = "/libraryBranches", produces = {"application/json", "application/xml"})
+    @GetMapping("/libraryBranches")
     public ResponseEntity<List<LibraryBranch>> readLibraryBranchs() {
         List<LibraryBranch> response = null;
 
@@ -61,7 +61,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @PutMapping(path = "/libraryBranch/{id}", produces = {"application/json", "application/xml"})
+    @PutMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable long id, @RequestBody LibraryBranch libraryBranch){
         LibraryBranch response = null;
 
@@ -82,7 +82,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @DeleteMapping(path = "/libraryBranch/{id}", produces = {"application/json", "application/xml"})
+    @DeleteMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> deleteLibraryBranch(@PathVariable long id){
         try {
             Optional<LibraryBranch> libraryBranch = libraryBranchService.getLibraryBranch(id);

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/v1/lms/administrator-service", produces = {"application/json", "application/xml"})
+@RequestMapping(value = "/v1/lms/administrator-service")
 public class AuthorController {
 
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
@@ -25,7 +26,7 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @PostMapping(path = "/authors", produces = {"application/json", "application/xml"})
+    @PostMapping("/authors")
     public ResponseEntity<Author> createAuthor(@RequestBody Author author){
         Author response = null;
 
@@ -44,7 +45,7 @@ public class AuthorController {
         return responseEntity;
     }
 
-    @GetMapping(path = "/authors", produces = {"application/json", "application/xml"})
+    @GetMapping("/authors")
     public ResponseEntity<List<Author>> readAuthors() {
         List<Author> response = null;
 
@@ -62,7 +63,7 @@ public class AuthorController {
         return responseEntity;
     }
 
-    @PutMapping(path = "/author/{id}", produces = {"application/json", "application/xml"})
+    @PutMapping(path = "/author/{id}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<Author> updateAuthor(@PathVariable long id, @RequestBody Author author){
         Author response = null;
 
@@ -84,7 +85,7 @@ public class AuthorController {
         return responseEntity;
     }
 
-    @DeleteMapping(path = "/author/{id}", produces = {"application/json", "application/xml"})
+    @DeleteMapping(path = "/author/{id}")
     public ResponseEntity<Author> deleteAuthor(@PathVariable long id){
         try {
             Optional<Author> author = authorService.getAuthor(id);

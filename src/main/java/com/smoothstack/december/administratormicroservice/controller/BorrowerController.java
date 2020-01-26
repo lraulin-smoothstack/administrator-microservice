@@ -24,16 +24,18 @@ public class BorrowerController {
     @Autowired
     private BorrowerService borrowerService;
 
-    @PostMapping(path = "/borrower", produces = {"application/json", "application/xml"})
-    public ResponseEntity<Borrower> createBorrower(@RequestBody Borrower borrower){
+    @PostMapping("/borrower")
+    public ResponseEntity<Borrower> createBorrower(@RequestBody Borrower borrower) {
         Borrower response = null;
 
         try {
             response = borrowerService.setBorrower(borrower);
         } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
+                    argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -43,14 +45,15 @@ public class BorrowerController {
         return responseEntity;
     }
 
-    @GetMapping(path = "/borrowers", produces = {"application/json", "application/xml"})
+    @GetMapping("/borrowers")
     public ResponseEntity<List<Borrower>> readBorrowers() {
         List<Borrower> response = null;
 
         try {
             response = borrowerService.getBorrowers();
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -60,8 +63,8 @@ public class BorrowerController {
         return responseEntity;
     }
 
-    @PutMapping(path = "/borrower/{id}", produces = {"application/json", "application/xml"})
-    public ResponseEntity<Borrower> updateBorrower(@PathVariable long id, @RequestBody Borrower borrower){
+    @PutMapping("/borrower/{id}")
+    public ResponseEntity<Borrower> updateBorrower(@PathVariable long id, @RequestBody Borrower borrower) {
         Borrower response = null;
 
         try {
@@ -69,9 +72,11 @@ public class BorrowerController {
             oldBorrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             response = borrowerService.setBorrower(borrower);
         } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
+                    argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -80,16 +85,18 @@ public class BorrowerController {
         return responseEntity;
     }
 
-    @DeleteMapping(path = "/borrower/{id}", produces = {"application/json", "application/xml"})
-    public ResponseEntity<Borrower> deleteBorrower(@PathVariable long id){
+    @DeleteMapping("/borrower/{id}")
+    public ResponseEntity<Borrower> deleteBorrower(@PathVariable long id) {
         try {
             Optional<Borrower> borrower = borrowerService.getBorrower(id);
             borrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             borrowerService.deleteBorrower(borrower.get());
         } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
+                    argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
