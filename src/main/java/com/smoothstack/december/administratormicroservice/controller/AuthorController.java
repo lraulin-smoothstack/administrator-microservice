@@ -2,6 +2,7 @@ package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
 import com.smoothstack.december.administratormicroservice.entity.Author;
+import com.smoothstack.december.administratormicroservice.entity.Book;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import com.smoothstack.december.administratormicroservice.service.AuthorService;
@@ -30,18 +31,18 @@ public class AuthorController {
         Author response = null;
 
         try {
-            logger.debug(author);
             response = authorService.setAuthor(author);
-            logger.debug(response);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
-//            logger.error(exception.toString());
+            logger.error(exception);
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 
     @GetMapping("/authors")
@@ -54,10 +55,12 @@ public class AuthorController {
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
-            //TODO
+            logger.error(exception);
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<List<Author>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 
     @PutMapping("/author/{id}")
@@ -74,10 +77,12 @@ public class AuthorController {
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
-//            logger.error(exception.toString());
+            logger.error(exception);
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 
     @DeleteMapping("/author/{id}")
@@ -91,9 +96,11 @@ public class AuthorController {
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
-//            logger.error(exception.toString());
+            logger.error(exception);
         }
 
-        return new ResponseEntity<Author>((Author) null, HttpStatus.OK);
+        ResponseEntity<Author> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 }

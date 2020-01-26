@@ -1,6 +1,7 @@
 package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
+import com.smoothstack.december.administratormicroservice.entity.Author;
 import com.smoothstack.december.administratormicroservice.entity.LibraryBranch;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
@@ -35,10 +36,12 @@ public class LibraryBranchController {
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
-//            logger.error(exception.toString());
+            logger.error(exception);
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 
     @GetMapping("/libraryBranchs")
@@ -50,10 +53,12 @@ public class LibraryBranchController {
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
-            //TODO
+            logger.error(exception);
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<List<LibraryBranch>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 
     @PutMapping("/libraryBranch/{id}")
@@ -69,10 +74,12 @@ public class LibraryBranchController {
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
-//            logger.error(exception.toString());
+            logger.error(exception);
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 
     @DeleteMapping("/libraryBranch/{id}")
@@ -86,9 +93,11 @@ public class LibraryBranchController {
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         } catch (Exception exception) {
-//            logger.error(exception.toString());
+            logger.error(exception);
         }
 
-        return new ResponseEntity<LibraryBranch>((LibraryBranch) null, HttpStatus.OK);
+        ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 }

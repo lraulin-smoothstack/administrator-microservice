@@ -2,6 +2,7 @@ package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
 import com.smoothstack.december.administratormicroservice.entity.Book;
+import com.smoothstack.december.administratormicroservice.entity.Borrower;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import com.smoothstack.december.administratormicroservice.service.BookService;
@@ -29,17 +30,16 @@ public class BookController {
         Book response = null;
 
         try {
-            logger.debug(book);
             response = bookService.setBook(book);
-            logger.debug(response);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
         }
 
-        logger.debug("New book successfully created.");
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<Book> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 
     @GetMapping("/books")
@@ -55,8 +55,9 @@ public class BookController {
             logger.error(exception);
         }
 
-        logger.debug("Books successfully retrieved.");
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<List<Book>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 
     @PutMapping("/book/{id}")
@@ -67,7 +68,6 @@ public class BookController {
             Optional<Book> oldBook = bookService.getBook(id);
             oldBook.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             response = bookService.setBook(book);
-            logger.debug(response);
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
@@ -76,8 +76,9 @@ public class BookController {
             logger.error(exception);
         }
 
-        logger.debug("Book " + id + " successfully updated.");
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ResponseEntity<Book> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 
     @DeleteMapping("/book/{id}")
@@ -94,7 +95,8 @@ public class BookController {
             logger.error(exception);
         }
 
-        logger.debug("Book " + id + " successfully deleted.");
-        return new ResponseEntity<Book>((Book) null, HttpStatus.OK);
+        ResponseEntity<Book> responseEntity = new ResponseEntity<>((Book) null, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
     }
 }
