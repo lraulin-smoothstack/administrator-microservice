@@ -371,3 +371,61 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'publisher_id' cannot 
 2020-01-26 06:43:43 [SpringContextShutdownHook] INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
 2020-01-26 06:43:43 [SpringContextShutdownHook] INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
 2020-01-26 06:43:43 [SpringContextShutdownHook] INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-01-26 08:05:24 [main] INFO  SpringBootTestContextBootstrapper:308 - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests], using SpringBootContextLoader
+2020-01-26 08:05:24 [main] INFO  AbstractContextLoader:264 - Could not detect default resource locations for test class [com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2020-01-26 08:05:24 [main] INFO  AnnotationConfigContextLoaderUtils:83 - Could not detect default configuration classes for test class [com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests]: AdministratorMicroserviceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2020-01-26 08:05:24 [main] INFO  SpringBootTestContextBootstrapper:235 - Found @SpringBootConfiguration com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication for test class com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests
+2020-01-26 08:05:24 [main] INFO  SpringBootTestContextBootstrapper:248 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2020-01-26 08:05:24 [main] INFO  SpringBootTestContextBootstrapper:177 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@9ebe38b, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4b23c30a, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@38089a5a, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@30e868be, org.springframework.test.context.support.DirtiesContextTestExecutionListener@66c92293, org.springframework.test.context.transaction.TransactionalTestExecutionListener@332796d3, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4f0100a7, org.springframework.test.context.event.EventPublishingTestExecutionListener@3cdf2c61, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@13ad5cd3, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1c33c17b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5bf0fe62, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1e097d59, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@673be18f]
+2020-01-26 08:05:24 [main] INFO  AdministratorMicroserviceApplicationTests:55 - Starting AdministratorMicroserviceApplicationTests on Lees-MacBook-Pro.local with PID 32235 (started by leeraulin in /Users/leeraulin/Projects/Smoothstack/lms-ms-app/administrator-microservice)
+2020-01-26 08:05:24 [main] INFO  AdministratorMicroserviceApplicationTests:651 - No active profile set, falling back to default profiles: default
+2020-01-26 08:05:25 [main] INFO  RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-01-26 08:05:25 [main] INFO  RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 109ms. Found 8 JPA repository interfaces.
+2020-01-26 08:05:25 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-26 08:05:26 [main] INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-01-26 08:05:26 [main] INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-01-26 08:05:26 [main] INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-01-26 08:05:26 [main] INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2020-01-26 08:05:26 [main] INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2020-01-26 08:05:26 [main] INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2020-01-26 08:05:26 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookLoanId (class must be instantiated by Interceptor)
+2020-01-26 08:05:26 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookCopyId (class must be instantiated by Interceptor)
+2020-01-26 08:05:27 [main] INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-01-26 08:05:27 [main] INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 08:05:28 [main] WARN  JpaBaseConfiguration$JpaWebConfiguration:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-26 08:05:28 [main] INFO  ThreadPoolTaskExecutor:171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-26 08:05:28 [main] INFO  AdministratorMicroserviceApplicationTests:61 - Started AdministratorMicroserviceApplicationTests in 4.333 seconds (JVM running for 5.43)
+2020-01-26 08:05:28 [SpringContextShutdownHook] INFO  ThreadPoolTaskExecutor:208 - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-01-26 08:05:28 [SpringContextShutdownHook] INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 08:05:28 [SpringContextShutdownHook] INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-01-26 08:05:28 [SpringContextShutdownHook] INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-01-26 08:05:33 [main] INFO  AdministratorMicroserviceApplication:55 - Starting AdministratorMicroserviceApplication on Lees-MacBook-Pro.local with PID 32296 (/Users/leeraulin/Projects/Smoothstack/lms-ms-app/administrator-microservice/target/classes started by leeraulin in /Users/leeraulin/Projects/Smoothstack/lms-ms-app/administrator-microservice)
+2020-01-26 08:05:33 [main] INFO  AdministratorMicroserviceApplication:651 - No active profile set, falling back to default profiles: default
+2020-01-26 08:05:34 [main] INFO  RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-01-26 08:05:34 [main] INFO  RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 62ms. Found 8 JPA repository interfaces.
+2020-01-26 08:05:34 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-26 08:05:34 [main] INFO  TomcatWebServer:92 - Tomcat initialized with port(s): 8086 (http)
+2020-01-26 08:05:34 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8086"]
+2020-01-26 08:05:34 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2020-01-26 08:05:34 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-01-26 08:05:34 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2020-01-26 08:05:34 [main] INFO  ContextLoader:284 - Root WebApplicationContext: initialization completed in 877 ms
+2020-01-26 08:05:34 [main] INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-01-26 08:05:34 [main] INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-01-26 08:05:34 [main] INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-01-26 08:05:35 [main] INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2020-01-26 08:05:35 [main] INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2020-01-26 08:05:35 [main] INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2020-01-26 08:05:35 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookLoanId (class must be instantiated by Interceptor)
+2020-01-26 08:05:35 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookCopyId (class must be instantiated by Interceptor)
+2020-01-26 08:05:35 [main] INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-01-26 08:05:35 [main] INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 08:05:36 [main] WARN  JpaBaseConfiguration$JpaWebConfiguration:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-26 08:05:36 [main] INFO  ThreadPoolTaskExecutor:171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-26 08:05:36 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8086"]
+2020-01-26 08:05:36 [main] INFO  TomcatWebServer:204 - Tomcat started on port(s): 8086 (http) with context path ''
+2020-01-26 08:05:36 [main] INFO  AdministratorMicroserviceApplication:61 - Started AdministratorMicroserviceApplication in 2.727 seconds (JVM running for 3.275)
+2020-01-26 08:05:43 [SpringContextShutdownHook] INFO  ThreadPoolTaskExecutor:208 - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-01-26 08:05:43 [SpringContextShutdownHook] INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 08:05:43 [SpringContextShutdownHook] INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-01-26 08:05:43 [SpringContextShutdownHook] INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
