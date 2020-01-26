@@ -87,19 +87,9 @@ public class BorrowerController {
 
     @DeleteMapping("/borrower/{id}")
     public ResponseEntity<Borrower> deleteBorrower(@PathVariable long id) {
-        try {
             Optional<Borrower> borrower = borrowerService.getBorrower(id);
             borrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             borrowerService.deleteBorrower(borrower.get());
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
-                    argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
-                    illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<Borrower> responseEntity = new ResponseEntity<Borrower>((Borrower) null, HttpStatus.OK);
         logger.debug(responseEntity);

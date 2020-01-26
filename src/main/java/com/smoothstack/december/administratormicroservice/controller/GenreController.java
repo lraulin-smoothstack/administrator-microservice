@@ -29,15 +29,7 @@ public class GenreController {
     public ResponseEntity<Genre> createGenre(@RequestBody Genre genre){
         Genre response = null;
 
-        try {
             response = genreService.setGenre(genre);
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -48,14 +40,8 @@ public class GenreController {
     public ResponseEntity<List<Genre>> readGenres() {
         List<Genre> response = null;
 
-        try {
             response = genreService.getGenres();
             logger.debug(response);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<List<Genre>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -66,18 +52,10 @@ public class GenreController {
     public ResponseEntity<Genre> updateGenre(@PathVariable long id, @RequestBody Genre genre){
         Genre response = null;
 
-        try {
             Optional<Genre> oldGenre = genreService.getGenre(id);
             oldGenre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             response = genreService.setGenre(genre);
             logger.debug(response);
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -86,17 +64,9 @@ public class GenreController {
 
     @DeleteMapping("/genre/{id}")
     public ResponseEntity<Genre> deleteGenre(@PathVariable long id){
-        try {
             Optional<Genre> genre = genreService.getGenre(id);
             genre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             genreService.deleteGenre(genre.get());
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);

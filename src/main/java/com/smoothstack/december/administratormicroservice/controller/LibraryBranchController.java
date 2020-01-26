@@ -29,15 +29,7 @@ public class LibraryBranchController {
     public ResponseEntity<LibraryBranch> createLibraryBranch(@RequestBody LibraryBranch libraryBranch){
         LibraryBranch response = null;
 
-        try {
             response = libraryBranchService.setLibraryBranch(libraryBranch);
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -48,13 +40,7 @@ public class LibraryBranchController {
     public ResponseEntity<List<LibraryBranch>> readLibraryBranchs() {
         List<LibraryBranch> response = null;
 
-        try {
             response = libraryBranchService.getLibraryBranchs();
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<List<LibraryBranch>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -65,17 +51,9 @@ public class LibraryBranchController {
     public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable long id, @RequestBody LibraryBranch libraryBranch){
         LibraryBranch response = null;
 
-        try {
             Optional<LibraryBranch> oldLibraryBranch = libraryBranchService.getLibraryBranch(id);
             oldLibraryBranch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             response = libraryBranchService.setLibraryBranch(libraryBranch);
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -84,17 +62,9 @@ public class LibraryBranchController {
 
     @DeleteMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> deleteLibraryBranch(@PathVariable long id){
-        try {
             Optional<LibraryBranch> libraryBranch = libraryBranchService.getLibraryBranch(id);
             libraryBranch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             libraryBranchService.deleteLibraryBranch(libraryBranch.get());
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
 
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
