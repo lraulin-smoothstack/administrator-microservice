@@ -20,7 +20,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/book")
+    @PostMapping("/books")
     public ResponseEntity<Book> createBook(@RequestBody Book book){
         Book response = null;
 
@@ -30,8 +30,6 @@ public class BookController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-//            logger.error(exception.toString());
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
