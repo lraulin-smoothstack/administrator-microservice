@@ -20,8 +20,8 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PutMapping("/book/{id}")
-    public ResponseEntity<Book> createBook(@PathVariable long id, @RequestBody Book book){
+    @PostMapping("/book")
+    public ResponseEntity<Book> createBook(@RequestBody Book book){
         Book response = null;
 
         try {
@@ -52,7 +52,7 @@ public class BookController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/book/{id}")
+    @PutMapping("/book/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable long id, @RequestBody Book book){
         Book response = null;
 
