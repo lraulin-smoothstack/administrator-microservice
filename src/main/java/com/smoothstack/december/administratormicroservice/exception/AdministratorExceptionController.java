@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class AdministratorExceptionController {
     @ExceptionHandler(value=ArgumentMissingException.class)
     public ResponseEntity<Object> exception(ArgumentMissingException exception) {
-        return new ResponseEntity<>("Argument missing: " + exception.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value=IllegalRelationReferenceException.class)
     public ResponseEntity<Object> exception(IllegalRelationReferenceException exception) {
-        return new ResponseEntity<>("Illegal relations: " + exception.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value=ResourceAlreadyExistsException.class)
     public ResponseEntity<Object> exception(ResourceAlreadyExistsException exception) {
-        return new ResponseEntity<>("Resource already exists: " + exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(exception, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
