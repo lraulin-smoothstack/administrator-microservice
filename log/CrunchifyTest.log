@@ -731,3 +731,221 @@ Caused by: org.hibernate.AnnotationException: mappedBy reference an unknown targ
 2020-01-26 09:51:42 [SpringContextShutdownHook] INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
 2020-01-26 09:51:42 [SpringContextShutdownHook] INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
 2020-01-26 09:51:42 [SpringContextShutdownHook] INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-01-26 09:56:22 [main] INFO  SpringBootTestContextBootstrapper:308 - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests], using SpringBootContextLoader
+2020-01-26 09:56:22 [main] INFO  AbstractContextLoader:264 - Could not detect default resource locations for test class [com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2020-01-26 09:56:22 [main] INFO  AnnotationConfigContextLoaderUtils:83 - Could not detect default configuration classes for test class [com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests]: AdministratorMicroserviceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2020-01-26 09:56:22 [main] INFO  SpringBootTestContextBootstrapper:235 - Found @SpringBootConfiguration com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication for test class com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests
+2020-01-26 09:56:22 [main] INFO  SpringBootTestContextBootstrapper:248 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2020-01-26 09:56:22 [main] INFO  SpringBootTestContextBootstrapper:177 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@9ebe38b, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4b23c30a, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@38089a5a, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@30e868be, org.springframework.test.context.support.DirtiesContextTestExecutionListener@66c92293, org.springframework.test.context.transaction.TransactionalTestExecutionListener@332796d3, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4f0100a7, org.springframework.test.context.event.EventPublishingTestExecutionListener@3cdf2c61, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@13ad5cd3, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1c33c17b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5bf0fe62, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1e097d59, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@673be18f]
+2020-01-26 09:56:23 [main] INFO  AdministratorMicroserviceApplicationTests:55 - Starting AdministratorMicroserviceApplicationTests on Lees-MacBook-Pro.local with PID 47124 (started by leeraulin in /Users/leeraulin/Projects/Smoothstack/lms-ms-app/administrator-microservice)
+2020-01-26 09:56:23 [main] INFO  AdministratorMicroserviceApplicationTests:651 - No active profile set, falling back to default profiles: default
+2020-01-26 09:56:23 [main] INFO  RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-01-26 09:56:23 [main] INFO  RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 106ms. Found 8 JPA repository interfaces.
+2020-01-26 09:56:24 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-26 09:56:24 [main] INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-01-26 09:56:24 [main] INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-01-26 09:56:24 [main] INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-01-26 09:56:24 [main] INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2020-01-26 09:56:25 [main] INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2020-01-26 09:56:25 [main] INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2020-01-26 09:56:25 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookLoanId (class must be instantiated by Interceptor)
+2020-01-26 09:56:25 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookCopyId (class must be instantiated by Interceptor)
+2020-01-26 09:56:25 [main] INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-01-26 09:56:25 [main] INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 09:56:26 [main] WARN  JpaBaseConfiguration$JpaWebConfiguration:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-26 09:56:26 [main] INFO  ThreadPoolTaskExecutor:171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-26 09:56:27 [main] INFO  AdministratorMicroserviceApplicationTests:61 - Started AdministratorMicroserviceApplicationTests in 4.327 seconds (JVM running for 5.425)
+2020-01-26 09:56:27 [SpringContextShutdownHook] INFO  ThreadPoolTaskExecutor:208 - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-01-26 09:56:27 [SpringContextShutdownHook] INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 09:56:27 [SpringContextShutdownHook] INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-01-26 09:56:27 [SpringContextShutdownHook] INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-01-26 09:56:32 [main] INFO  AdministratorMicroserviceApplication:55 - Starting AdministratorMicroserviceApplication on Lees-MacBook-Pro.local with PID 47176 (/Users/leeraulin/Projects/Smoothstack/lms-ms-app/administrator-microservice/target/classes started by leeraulin in /Users/leeraulin/Projects/Smoothstack/lms-ms-app/administrator-microservice)
+2020-01-26 09:56:32 [main] INFO  AdministratorMicroserviceApplication:651 - No active profile set, falling back to default profiles: default
+2020-01-26 09:56:32 [main] INFO  RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-01-26 09:56:32 [main] INFO  RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 60ms. Found 8 JPA repository interfaces.
+2020-01-26 09:56:32 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-26 09:56:32 [main] INFO  TomcatWebServer:92 - Tomcat initialized with port(s): 8086 (http)
+2020-01-26 09:56:32 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8086"]
+2020-01-26 09:56:32 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2020-01-26 09:56:32 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-01-26 09:56:33 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2020-01-26 09:56:33 [main] INFO  ContextLoader:284 - Root WebApplicationContext: initialization completed in 920 ms
+2020-01-26 09:56:33 [main] INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-01-26 09:56:33 [main] INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-01-26 09:56:33 [main] INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-01-26 09:56:33 [main] INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2020-01-26 09:56:33 [main] INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2020-01-26 09:56:33 [main] INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2020-01-26 09:56:33 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookLoanId (class must be instantiated by Interceptor)
+2020-01-26 09:56:33 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookCopyId (class must be instantiated by Interceptor)
+2020-01-26 09:56:34 [main] INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-01-26 09:56:34 [main] INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 09:56:34 [main] WARN  JpaBaseConfiguration$JpaWebConfiguration:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-26 09:56:34 [main] INFO  ThreadPoolTaskExecutor:171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-26 09:56:34 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8086"]
+2020-01-26 09:56:34 [main] INFO  TomcatWebServer:204 - Tomcat started on port(s): 8086 (http) with context path ''
+2020-01-26 09:56:34 [main] INFO  AdministratorMicroserviceApplication:61 - Started AdministratorMicroserviceApplication in 2.849 seconds (JVM running for 3.439)
+2020-01-26 09:56:39 [http-nio-8086-exec-2] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-01-26 09:56:39 [http-nio-8086-exec-2] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2020-01-26 09:56:39 [http-nio-8086-exec-2] INFO  DispatcherServlet:547 - Completed initialization in 12 ms
+2020-01-26 09:56:39 [http-nio-8086-exec-2] WARN  DefaultHandlerExceptionResolver:199 - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported]
+2020-01-26 09:57:09 [http-nio-8086-exec-3] WARN  DefaultHandlerExceptionResolver:199 - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported]
+2020-01-26 09:57:23 [http-nio-8086-exec-4] WARN  DefaultHandlerExceptionResolver:199 - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported]
+2020-01-26 09:58:57 [http-nio-8086-exec-7] WARN  DefaultHandlerExceptionResolver:199 - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/x-www-form-urlencoded;charset=UTF-8' not supported]
+2020-01-26 10:03:34 [http-nio-8086-exec-5] WARN  DefaultHandlerExceptionResolver:199 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+2020-01-26 10:05:04 [SpringContextShutdownHook] INFO  ThreadPoolTaskExecutor:208 - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-01-26 10:05:04 [SpringContextShutdownHook] INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 10:05:04 [SpringContextShutdownHook] INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-01-26 10:05:04 [SpringContextShutdownHook] INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-01-26 10:05:10 [main] INFO  SpringBootTestContextBootstrapper:308 - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests], using SpringBootContextLoader
+2020-01-26 10:05:10 [main] INFO  AbstractContextLoader:264 - Could not detect default resource locations for test class [com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2020-01-26 10:05:10 [main] INFO  AnnotationConfigContextLoaderUtils:83 - Could not detect default configuration classes for test class [com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests]: AdministratorMicroserviceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2020-01-26 10:05:10 [main] INFO  SpringBootTestContextBootstrapper:235 - Found @SpringBootConfiguration com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication for test class com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplicationTests
+2020-01-26 10:05:10 [main] INFO  SpringBootTestContextBootstrapper:248 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2020-01-26 10:05:10 [main] INFO  SpringBootTestContextBootstrapper:177 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@9ebe38b, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4b23c30a, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@38089a5a, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@30e868be, org.springframework.test.context.support.DirtiesContextTestExecutionListener@66c92293, org.springframework.test.context.transaction.TransactionalTestExecutionListener@332796d3, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4f0100a7, org.springframework.test.context.event.EventPublishingTestExecutionListener@3cdf2c61, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@13ad5cd3, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1c33c17b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5bf0fe62, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1e097d59, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@673be18f]
+2020-01-26 10:05:10 [main] INFO  AdministratorMicroserviceApplicationTests:55 - Starting AdministratorMicroserviceApplicationTests on Lees-MacBook-Pro.local with PID 48334 (started by leeraulin in /Users/leeraulin/Projects/Smoothstack/lms-ms-app/administrator-microservice)
+2020-01-26 10:05:10 [main] INFO  AdministratorMicroserviceApplicationTests:651 - No active profile set, falling back to default profiles: default
+2020-01-26 10:05:11 [main] INFO  RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-01-26 10:05:11 [main] INFO  RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 127ms. Found 8 JPA repository interfaces.
+2020-01-26 10:05:12 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-26 10:05:12 [main] INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-01-26 10:05:12 [main] INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-01-26 10:05:12 [main] INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-01-26 10:05:12 [main] INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2020-01-26 10:05:12 [main] INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2020-01-26 10:05:12 [main] INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2020-01-26 10:05:13 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookLoanId (class must be instantiated by Interceptor)
+2020-01-26 10:05:13 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookCopyId (class must be instantiated by Interceptor)
+2020-01-26 10:05:13 [main] INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-01-26 10:05:13 [main] INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 10:05:14 [main] WARN  JpaBaseConfiguration$JpaWebConfiguration:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-26 10:05:14 [main] INFO  ThreadPoolTaskExecutor:171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-26 10:05:15 [main] INFO  AdministratorMicroserviceApplicationTests:61 - Started AdministratorMicroserviceApplicationTests in 4.518 seconds (JVM running for 5.654)
+2020-01-26 10:05:15 [SpringContextShutdownHook] INFO  ThreadPoolTaskExecutor:208 - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-01-26 10:05:15 [SpringContextShutdownHook] INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 10:05:15 [SpringContextShutdownHook] INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-01-26 10:05:15 [SpringContextShutdownHook] INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-01-26 10:05:19 [main] INFO  AdministratorMicroserviceApplication:55 - Starting AdministratorMicroserviceApplication on Lees-MacBook-Pro.local with PID 48383 (/Users/leeraulin/Projects/Smoothstack/lms-ms-app/administrator-microservice/target/classes started by leeraulin in /Users/leeraulin/Projects/Smoothstack/lms-ms-app/administrator-microservice)
+2020-01-26 10:05:19 [main] INFO  AdministratorMicroserviceApplication:651 - No active profile set, falling back to default profiles: default
+2020-01-26 10:05:20 [main] INFO  RepositoryConfigurationDelegate:127 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-01-26 10:05:20 [main] INFO  RepositoryConfigurationDelegate:187 - Finished Spring Data repository scanning in 63ms. Found 8 JPA repository interfaces.
+2020-01-26 10:05:20 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-26 10:05:20 [main] INFO  TomcatWebServer:92 - Tomcat initialized with port(s): 8086 (http)
+2020-01-26 10:05:20 [main] INFO  Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8086"]
+2020-01-26 10:05:20 [main] INFO  StandardService:173 - Starting service [Tomcat]
+2020-01-26 10:05:20 [main] INFO  StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-01-26 10:05:20 [main] INFO  [/]:173 - Initializing Spring embedded WebApplicationContext
+2020-01-26 10:05:20 [main] INFO  ContextLoader:284 - Root WebApplicationContext: initialization completed in 923 ms
+2020-01-26 10:05:21 [main] INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-01-26 10:05:21 [main] INFO  Version:46 - HHH000412: Hibernate Core {5.4.10.Final}
+2020-01-26 10:05:21 [main] INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-01-26 10:05:21 [main] INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2020-01-26 10:05:21 [main] INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2020-01-26 10:05:21 [main] INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2020-01-26 10:05:21 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookLoanId (class must be instantiated by Interceptor)
+2020-01-26 10:05:21 [main] INFO  PojoInstantiator:67 - HHH000182: No default (no-argument) constructor for class: com.smoothstack.december.administratormicroservice.entity.BookCopyId (class must be instantiated by Interceptor)
+2020-01-26 10:05:22 [main] INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-01-26 10:05:22 [main] INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 10:05:22 [main] WARN  JpaBaseConfiguration$JpaWebConfiguration:220 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-26 10:05:22 [main] INFO  ThreadPoolTaskExecutor:171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-26 10:05:22 [main] INFO  Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8086"]
+2020-01-26 10:05:22 [main] INFO  TomcatWebServer:204 - Tomcat started on port(s): 8086 (http) with context path ''
+2020-01-26 10:05:22 [main] INFO  AdministratorMicroserviceApplication:61 - Started AdministratorMicroserviceApplication in 2.867 seconds (JVM running for 3.428)
+2020-01-26 10:05:40 [http-nio-8086-exec-1] INFO  [/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-01-26 10:05:40 [http-nio-8086-exec-1] INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcherServlet'
+2020-01-26 10:05:40 [http-nio-8086-exec-1] INFO  DispatcherServlet:547 - Completed initialization in 9 ms
+2020-01-26 10:13:33 [http-nio-8086-exec-2] ERROR [dispatcherServlet]:175 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessApiUsageException: The given id must not be null!; nested exception is java.lang.IllegalArgumentException: The given id must not be null!] with root cause
+java.lang.IllegalArgumentException: The given id must not be null!
+	at org.springframework.util.Assert.notNull(Assert.java:198) ~[spring-core-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById(SimpleJpaRepository.java:312) ~[spring-data-jpa-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_131]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:371) ~[spring-data-commons-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:204) ~[spring-data-commons-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:657) ~[spring-data-commons-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:621) ~[spring-data-commons-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:605) ~[spring-data-commons-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:80) ~[spring-data-commons-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:366) ~[spring-tx-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:99) ~[spring-tx-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139) ~[spring-tx-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:178) ~[spring-data-jpa-2.2.4.RELEASE.jar:2.2.4.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:95) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at com.sun.proxy.$Proxy120.existsById(Unknown Source) ~[?:?]
+	at com.smoothstack.december.administratormicroservice.service.BookService.setBook(BookService.java:70) ~[classes/:?]
+	at com.smoothstack.december.administratormicroservice.service.BookService$$FastClassBySpringCGLIB$$e1efeedb.invoke(<generated>) ~[classes/:?]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:769) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:747) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:366) ~[spring-tx-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:99) ~[spring-tx-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:747) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689) ~[spring-aop-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at com.smoothstack.december.administratormicroservice.service.BookService$$EnhancerBySpringCGLIB$$9c722fa5.setBook(<generated>) ~[classes/:?]
+	at com.smoothstack.december.administratormicroservice.controller.BookController.createBook(BookController.java:33) ~[classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_131]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106) ~[spring-webmvc-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:888) ~[spring-webmvc-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793) ~[spring-webmvc-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040) ~[spring-webmvc-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943) ~[spring-webmvc-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) ~[spring-web-5.2.3.RELEASE.jar:5.2.3.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:367) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:860) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1598) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_131]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_131]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.30.jar:9.0.30]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_131]
+2020-01-26 10:47:28 [SpringContextShutdownHook] INFO  ThreadPoolTaskExecutor:208 - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-01-26 10:47:28 [SpringContextShutdownHook] INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-01-26 10:47:28 [SpringContextShutdownHook] INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-01-26 10:47:28 [SpringContextShutdownHook] INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
