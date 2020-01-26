@@ -4,9 +4,11 @@ import com.smoothstack.december.administratormicroservice.AdministratorMicroserv
 import com.smoothstack.december.administratormicroservice.entity.Author;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
+import com.smoothstack.december.administratormicroservice.exception.ItemNotFoundException;
 import com.smoothstack.december.administratormicroservice.service.AuthorService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,7 +37,7 @@ public class AuthorController {
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ItemNotFoundException();
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -53,7 +55,7 @@ public class AuthorController {
             response = authorService.getAuthors();
             logger.debug(response);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ItemNotFoundException();
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -63,7 +65,25 @@ public class AuthorController {
         return responseEntity;
     }
 
-    @PutMapping(path = "/author/{id}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
+    @GetMapping("/author/{id}")
+    public ResponseEntity<Author> readAuthorById(@PathVariable long id) {
+        Optional<Author> response = null;
+
+        try {
+            response = authorService.getAuthor(id);
+            response.orElseThrow(()->new ItemNotFoundException());
+        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
+            throw new ItemNotFoundException();
+        } catch (Exception exception) {
+            logger.error(exception);
+        }
+
+        ResponseEntity<Author> responseEntity = new ResponseEntity<>(response.get(), HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
+    }
+
+    @PutMapping("/author/{id}")
     public ResponseEntity<Author> updateAuthor(@PathVariable long id, @RequestBody Author author){
         Author response = null;
 
@@ -75,7 +95,7 @@ public class AuthorController {
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ItemNotFoundException();
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -94,7 +114,7 @@ public class AuthorController {
         } catch (ArgumentMissingException argumentMissingException) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ItemNotFoundException();
         } catch (Exception exception) {
             logger.error(exception);
         }

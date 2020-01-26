@@ -2,6 +2,7 @@ package com.smoothstack.december.administratormicroservice.service;
 
 import com.smoothstack.december.administratormicroservice.dao.BookLoanDAO;
 import com.smoothstack.december.administratormicroservice.entity.BookLoan;
+import com.smoothstack.december.administratormicroservice.entity.BookLoanId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class BookLoanService {
     @Autowired
     private BookLoanDAO bookLoanDAO;
 
-    public Optional<BookLoan> getBookLoan(long id) {
+    public Optional<BookLoan> getBookLoan(BookLoanId id) {
         return bookLoanDAO.findById(id);
     }
 
