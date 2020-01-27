@@ -1,8 +1,7 @@
 package com.smoothstack.december.administratormicroservice.exception;
 
 public class ArgumentMissingException extends RuntimeException {
-
-    private static final long serialVersionUID = 4161022243243086738L;
+    private static final long serialVersionUID = 4061998380592216571L;
 
     public ArgumentMissingException(String message) {
         super(message);

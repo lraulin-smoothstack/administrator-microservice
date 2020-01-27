@@ -2,7 +2,7 @@ package com.smoothstack.december.administratormicroservice.service;
 
 import com.smoothstack.december.administratormicroservice.dao.LibraryBranchDAO;
 import com.smoothstack.december.administratormicroservice.entity.LibraryBranch;
-import com.smoothstack.december.administratormicroservice.entity.LibraryBranch;
+import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +14,23 @@ import java.util.Optional;
 @Transactional
 public class LibraryBranchService {
     @Autowired
-    private LibraryBranchDAO LibraryBranchDAO;
+    private LibraryBranchDAO libraryBranchDAO;
 
-    public Optional<LibraryBranch> getLibraryBranch(long id) {
-        return LibraryBranchDAO.findById(id);
+    public LibraryBranch getLibraryBranch(long id) {
+        Optional<LibraryBranch> libraryBranch = libraryBranchDAO.findById(id);
+        libraryBranch.orElseThrow(()-> new IllegalRelationReferenceException("No libraryBranch with id " + id));
+        return libraryBranch.get();
     }
-    public List<LibraryBranch> getLibraryBranchs() {
-        return LibraryBranchDAO.findAll();
+    public List<LibraryBranch> getLibraryBranches() {
+        return libraryBranchDAO.findAll();
     }
 
     public LibraryBranch setLibraryBranch(LibraryBranch libraryBranch) {
-        return LibraryBranchDAO.save(libraryBranch);
+        return libraryBranchDAO.save(libraryBranch);
     }
 
-    public void deleteLibraryBranch(LibraryBranch libraryBranch) {
-        LibraryBranchDAO.delete(libraryBranch);
+    public void deleteLibraryBranch(long id) {
+        LibraryBranch libraryBranch = getLibraryBranch(id);
+        libraryBranchDAO.delete(libraryBranch);
     }
 }

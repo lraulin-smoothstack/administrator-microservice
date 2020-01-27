@@ -2,7 +2,7 @@ package com.smoothstack.december.administratormicroservice.service;
 
 import com.smoothstack.december.administratormicroservice.dao.PublisherDAO;
 import com.smoothstack.december.administratormicroservice.entity.Publisher;
-import com.smoothstack.december.administratormicroservice.entity.Publisher;
+import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,21 +14,24 @@ import java.util.Optional;
 @Transactional
 public class PublisherService {
     @Autowired
-    private PublisherDAO PublisherDAO;
+    private PublisherDAO publisherDAO;
 
-    public Optional<Publisher> getPublisher(long id) {
-        return PublisherDAO.findById(id);
+    public Publisher getPublisher(long id) {
+        Optional<Publisher> publisher = publisherDAO.findById(id);
+        publisher.orElseThrow(()-> new IllegalRelationReferenceException("No publisher with id " + id));
+        return publisher.get();
     }
 
     public List<Publisher> getPublishers() {
-        return PublisherDAO.findAll();
+        return publisherDAO.findAll();
     }
 
     public Publisher setPublisher(Publisher publisher) {
-        return PublisherDAO.save(publisher);
+        return publisherDAO.save(publisher);
     }
 
-    public void deletePublisher(Publisher publisher) {
-        PublisherDAO.delete(publisher);
+    public void deletePublisher(long id) {
+        Publisher publisher = getPublisher(id);
+        publisherDAO.delete(publisher);
     }
 }

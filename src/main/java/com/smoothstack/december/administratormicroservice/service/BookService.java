@@ -1,6 +1,5 @@
 package com.smoothstack.december.administratormicroservice.service;
 
-import com.smoothstack.december.administratormicroservice.dao.AuthorDAO;
 import com.smoothstack.december.administratormicroservice.dao.BookDAO;
 import com.smoothstack.december.administratormicroservice.dao.GenreDAO;
 import com.smoothstack.december.administratormicroservice.entity.Author;
@@ -8,7 +7,6 @@ import com.smoothstack.december.administratormicroservice.entity.Book;
 import com.smoothstack.december.administratormicroservice.entity.Genre;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
-import com.smoothstack.december.administratormicroservice.exception.ResourceAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +18,7 @@ import java.util.Optional;
 @Transactional
 public class BookService {
     @Autowired
-    private AuthorDAO authorDAO;
+    private BookDAO authorDAO;
 
     @Autowired
     private BookDAO bookDAO;
@@ -28,8 +26,10 @@ public class BookService {
     @Autowired
     private GenreDAO genreDAO;
 
-    public Optional<Book> getBook(long id) {
-        return bookDAO.findById(id);
+    public Book getBook(long id) {
+        Optional<Book> book = bookDAO.findById(id);
+        book.orElseThrow(()-> new IllegalRelationReferenceException("No book with id " + id));
+        return book.get();
     }
 
     public List<Book> getBooks() {
@@ -67,14 +67,11 @@ public class BookService {
                         "The genre with id of " + genre.getId() + " does not exist");
             }
         }
-        if (bookDAO.existsById(book.getId())) {
-            throw new ResourceAlreadyExistsException("A book with this id already exists");
-        }
-
         return bookDAO.save(book);
     }
 
-    public void deleteBook(Book book) {
+    public void deleteBook(long id) {
+        Book book = getBook(id);
         bookDAO.delete(book);
     }
 }
