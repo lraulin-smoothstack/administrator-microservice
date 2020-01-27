@@ -2,8 +2,6 @@ package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
 import com.smoothstack.december.administratormicroservice.entity.Genre;
-import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
-import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import com.smoothstack.december.administratormicroservice.service.GenreService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1/lms/administrator-service")
+@RequestMapping("/lms/administrator")
 public class GenreController {
 
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
@@ -28,7 +24,6 @@ public class GenreController {
     @PostMapping("/genres")
     public ResponseEntity<Genre> createGenre(@RequestBody Genre genre) {
         Genre response = genreService.setGenre(genre);
-
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
@@ -37,8 +32,6 @@ public class GenreController {
     @GetMapping("/genres")
     public ResponseEntity<List<Genre>> readGenres() {
         List<Genre> response = genreService.getGenres();
-        logger.debug(response);
-
         ResponseEntity<List<Genre>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
