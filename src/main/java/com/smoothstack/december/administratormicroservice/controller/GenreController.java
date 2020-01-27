@@ -37,6 +37,14 @@ public class GenreController {
         return responseEntity;
     }
 
+    @GetMapping("/genre/{id}")
+    public ResponseEntity<Genre> readGenreById(@PathVariable long id) {
+        Genre response = genreService.getGenre(id);
+        ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
+    }
+
     @PutMapping("/genre/{id}")
     public ResponseEntity<Genre> updateGenre(@PathVariable long id, @RequestBody Genre genre) {
         Genre response = genreService.setGenre(genre);

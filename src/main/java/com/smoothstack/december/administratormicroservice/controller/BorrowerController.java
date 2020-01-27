@@ -38,6 +38,14 @@ public class BorrowerController {
         return responseEntity;
     }
 
+    @GetMapping("/borrower/{id}")
+    public ResponseEntity<Borrower> readBorrowerById(@PathVariable long id) {
+        Borrower response = borrowerService.getBorrower(id);
+        ResponseEntity<Borrower> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
+    }
+
     @PutMapping("/borrower/{id}")
     public ResponseEntity<Borrower> updateBorrower(@PathVariable long id, @RequestBody Borrower borrower) {
         Borrower response = borrowerService.setBorrower(borrower);

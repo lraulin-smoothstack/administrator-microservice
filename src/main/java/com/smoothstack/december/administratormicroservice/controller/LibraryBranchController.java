@@ -38,9 +38,17 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
+    @GetMapping("/libraryBranch/{id}")
+    public ResponseEntity<LibraryBranch> readLibraryBranchById(@PathVariable long id) {
+        LibraryBranch response = libraryBranchService.getLibraryBranch(id);
+        ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
+    }
+
     @PutMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable long id,
-            @RequestBody LibraryBranch libraryBranch) {
+                                                             @RequestBody LibraryBranch libraryBranch) {
         LibraryBranch response = libraryBranchService.setLibraryBranch(libraryBranch);
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);

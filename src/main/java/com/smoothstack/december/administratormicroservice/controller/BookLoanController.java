@@ -37,6 +37,14 @@ public class BookLoanController {
         return responseEntity;
     }
 
+    @GetMapping("/bookLoan/{id}")
+    public ResponseEntity<BookLoan> readBookLoanById(@PathVariable long id) {
+        BookLoan response = bookLoanService.getBookLoan(id);
+        ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
+    }
+
     @PutMapping("/bookLoan")
     public ResponseEntity<BookLoan> updateBookLoan(@RequestBody BookLoan bookLoan) {
         BookLoan response = bookLoanService.setBookLoan(bookLoan);
