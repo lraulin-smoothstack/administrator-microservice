@@ -31,7 +31,7 @@ public class BookLoanService {
         return bookLoanDAO.save(bookLoan);
     }
 
-    public void deleteBookLoan(BookLoan bookLoan) {
-        bookLoanDAO.delete(bookLoan);
+    public void deleteBookLoan(long id) {
+        bookLoanDAO.delete(id);
     }
 }

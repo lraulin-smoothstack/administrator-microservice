@@ -32,7 +32,8 @@ public class GenreService {
         return genreDAO.save(genre);
     }
 
-    public void deleteGenre(Genre genre) {
+    public void deleteGenre(long id) {
+        Genre genre = getGenre(id);
         genreDAO.delete(genre);
     }
 }

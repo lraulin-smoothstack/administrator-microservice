@@ -2,8 +2,6 @@ package com.smoothstack.december.administratormicroservice.service;
 
 import com.smoothstack.december.administratormicroservice.dao.AuthorDAO;
 import com.smoothstack.december.administratormicroservice.entity.Author;
-import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
-import com.smoothstack.december.administratormicroservice.exception.ExtraneousIdException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

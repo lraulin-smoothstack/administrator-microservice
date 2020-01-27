@@ -30,7 +30,8 @@ public class PublisherService {
         return publisherDAO.save(publisher);
     }
 
-    public void deletePublisher(Publisher publisher) {
+    public void deletePublisher(long id) {
+        Publisher publisher = getPublisher(id);
         publisherDAO.delete(publisher);
     }
 }

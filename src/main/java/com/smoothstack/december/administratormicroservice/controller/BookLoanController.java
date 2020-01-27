@@ -27,9 +27,7 @@ public class BookLoanController {
 
     @PostMapping("/bookLoans")
     public ResponseEntity<BookLoan> createBookLoan(@RequestBody BookLoan bookLoan) {
-        BookLoan response = null;
-
-        response = bookLoanService.setBookLoan(bookLoan);
+        BookLoan response = bookLoanService.setBookLoan(bookLoan);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
@@ -37,11 +35,7 @@ public class BookLoanController {
 
     @GetMapping("/bookLoans")
     public ResponseEntity<List<BookLoan>> readBookLoans() {
-        List<BookLoan> response = null;
-
-        response = bookLoanService.getBookLoans();
-        logger.debug(response);
-
+        List<BookLoan> response = bookLoanService.getBookLoans();
         ResponseEntity<List<BookLoan>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
@@ -49,24 +43,15 @@ public class BookLoanController {
 
     @PutMapping("/bookLoan")
     public ResponseEntity<BookLoan> updateBookLoan(@RequestBody BookLoan bookLoan) {
-        BookLoan response = null;
-
-        Optional<BookLoan> oldBookLoan = bookLoanService.getBookLoan(bookLoan.getId());
-        oldBookLoan.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        response = bookLoanService.setBookLoan(bookLoan);
-        logger.debug(response);
-
+        BookLoan response = bookLoanService.setBookLoan(bookLoan);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
 
-    @DeleteMapping("/bookLoan")
-    public ResponseEntity<BookLoan> deleteBookLoan(@RequestBody BookLoan bookLoan) {
-        Optional<BookLoan> oldBookLoan = bookLoanService.getBookLoan(bookLoan.getId());
-        oldBookLoan.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        bookLoanService.deleteBookLoan(oldBookLoan.get());
-
+    @DeleteMapping("/bookLoan/{id}")
+    public ResponseEntity<BookLoan> deleteBookLoan(@PathVariable long id) {
+        bookLoanService.deleteBookLoan(id);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;

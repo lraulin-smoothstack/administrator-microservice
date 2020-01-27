@@ -29,7 +29,8 @@ public class LibraryBranchService {
         return libraryBranchDAO.save(libraryBranch);
     }
 
-    public void deleteLibraryBranch(LibraryBranch libraryBranch) {
+    public void deleteLibraryBranch(long id) {
+        LibraryBranch libraryBranch = getLibraryBranch(id);
         libraryBranchDAO.delete(libraryBranch);
     }
 }

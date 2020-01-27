@@ -24,9 +24,7 @@ public class LibraryBranchController {
 
     @PostMapping("/libraryBranch")
     public ResponseEntity<LibraryBranch> createLibraryBranch(@RequestBody LibraryBranch libraryBranch) {
-        LibraryBranch response = null;
-
-        response = libraryBranchService.setLibraryBranch(libraryBranch);
+        LibraryBranch response = libraryBranchService.setLibraryBranch(libraryBranch);
 
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -35,9 +33,7 @@ public class LibraryBranchController {
 
     @GetMapping("/libraryBranches")
     public ResponseEntity<List<LibraryBranch>> readLibraryBranchs() {
-        List<LibraryBranch> response = null;
-
-        response = libraryBranchService.getLibraryBranches();
+        List<LibraryBranch> response = libraryBranchService.getLibraryBranches();
 
         ResponseEntity<List<LibraryBranch>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -47,9 +43,7 @@ public class LibraryBranchController {
     @PutMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable long id,
             @RequestBody LibraryBranch libraryBranch) {
-        LibraryBranch response = null;
-
-        Optional<LibraryBranch> oldLibraryBranch = libraryBranchService.getLibraryBranch(id);
+        LibraryBranch response = libraryBranchService.getLibraryBranch(id);
         oldLibraryBranch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         response = libraryBranchService.setLibraryBranch(libraryBranch);
 
@@ -60,7 +54,7 @@ public class LibraryBranchController {
 
     @DeleteMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> deleteLibraryBranch(@PathVariable long id) {
-        Optional<LibraryBranch> libraryBranch = libraryBranchService.getLibraryBranch(id);
+        LibraryBranch libraryBranch = libraryBranchService.getLibraryBranch(id);
         libraryBranch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         libraryBranchService.deleteLibraryBranch(libraryBranch.get());
 

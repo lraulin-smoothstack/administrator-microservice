@@ -1,6 +1,5 @@
 package com.smoothstack.december.administratormicroservice.service;
 
-import com.smoothstack.december.administratormicroservice.dao.AuthorDAO;
 import com.smoothstack.december.administratormicroservice.dao.BookDAO;
 import com.smoothstack.december.administratormicroservice.dao.GenreDAO;
 import com.smoothstack.december.administratormicroservice.entity.Author;
@@ -8,7 +7,6 @@ import com.smoothstack.december.administratormicroservice.entity.Book;
 import com.smoothstack.december.administratormicroservice.entity.Genre;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
-import com.smoothstack.december.administratormicroservice.exception.ResourceAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +36,7 @@ public class BookService {
         return bookDAO.findAll();
     }
 
-    private Book setBook(Book book) {
+    public Book setBook(Book book) {
         if (book.getTitle() == null) {
             throw new ArgumentMissingException("Missing 'title'");
         }
@@ -69,18 +67,11 @@ public class BookService {
                         "The genre with id of " + genre.getId() + " does not exist");
             }
         }
-
-
         return bookDAO.save(book);
     }
 
-    public Book createBook(Book book) {
-        if (book.getId() != null) {
-            throw new IllegalArgumentException("A book with this id already exists");
-        }
-    }
-
-    public void deleteBook(Book book) {
+    public void deleteBook(long id) {
+        Book book = getBook(id);
         bookDAO.delete(book);
     }
 }

@@ -35,8 +35,9 @@ public class BorrowerService {
         return borrowerDAO.save(Borrower);
     }
 
-    public void deleteBorrower(Borrower Borrower) {
-        borrowerDAO.delete(Borrower);
+    public void deleteBorrower(long id) {
+        Borrower borrower = getBorrower(id);
+        borrowerDAO.delete(borrower);
     }
 
     public Optional<BookLoan> getBookLoan(BookLoan.BookLoanId id) {

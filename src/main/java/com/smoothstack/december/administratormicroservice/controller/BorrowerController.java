@@ -26,9 +26,7 @@ public class BorrowerController {
 
     @PostMapping("/borrower")
     public ResponseEntity<Borrower> createBorrower(@RequestBody Borrower borrower) {
-        Borrower response = null;
-
-        response = borrowerService.setBorrower(borrower);
+        Borrower response = borrowerService.setBorrower(borrower);
 
         ResponseEntity<Borrower> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -37,9 +35,7 @@ public class BorrowerController {
 
     @GetMapping("/borrowers")
     public ResponseEntity<List<Borrower>> readBorrowers() {
-        List<Borrower> response = null;
-
-        response = borrowerService.getBorrowers();
+        List<Borrower> response = borrowerService.getBorrowers();
 
         ResponseEntity<List<Borrower>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -48,9 +44,7 @@ public class BorrowerController {
 
     @PutMapping("/borrower/{id}")
     public ResponseEntity<Borrower> updateBorrower(@PathVariable long id, @RequestBody Borrower borrower) {
-        Borrower response = null;
-
-        Optional<Borrower> oldBorrower = borrowerService.getBorrower(id);
+        Borrower response = borrowerService.getBorrower(id);
         oldBorrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         response = borrowerService.setBorrower(borrower);
 
@@ -61,7 +55,7 @@ public class BorrowerController {
 
     @DeleteMapping("/borrower/{id}")
     public ResponseEntity<Borrower> deleteBorrower(@PathVariable long id) {
-        Optional<Borrower> borrower = borrowerService.getBorrower(id);
+        Borrower borrower = borrowerService.getBorrower(id);
         borrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         borrowerService.deleteBorrower(borrower.get());
 
