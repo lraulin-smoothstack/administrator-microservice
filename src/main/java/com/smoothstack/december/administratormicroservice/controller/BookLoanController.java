@@ -49,9 +49,9 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @DeleteMapping("/bookLoan/{id}")
-    public ResponseEntity<BookLoan> deleteBookLoan(@PathVariable long id) {
-        bookLoanService.deleteBookLoan(id);
+    @DeleteMapping("/bookLoan")
+    public ResponseEntity<BookLoan> deleteBookLoan(@RequestBody BookLoan bookLoan) {
+        bookLoanService.deleteBookLoan(id));
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;

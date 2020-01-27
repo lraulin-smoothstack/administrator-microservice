@@ -28,6 +28,14 @@ public class AdministratorRestExceptionHandler extends ResponseEntityExceptionHa
         return new ResponseEntity<ApiError>(apiError, apiError.getStatus());
     }
 
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<ApiError> handleException(BadRequestException exception) {
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, "Reference not found", exception.getLocalizedMessage());
+        logger.error(apiError);
+        return new ResponseEntity<ApiError>(apiError, apiError.getStatus());
+    }
+
+
     @ExceptionHandler(value = IllegalRelationReferenceException.class)
     public ResponseEntity<ApiError> handleException(IllegalRelationReferenceException exception) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, "Reference not found", exception.getLocalizedMessage());

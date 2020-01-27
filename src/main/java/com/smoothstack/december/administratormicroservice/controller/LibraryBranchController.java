@@ -54,10 +54,7 @@ public class LibraryBranchController {
 
     @DeleteMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> deleteLibraryBranch(@PathVariable long id) {
-        LibraryBranch libraryBranch = libraryBranchService.getLibraryBranch(id);
-        libraryBranch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        libraryBranchService.deleteLibraryBranch(libraryBranch.get());
-
+        libraryBranchService.deleteLibraryBranch(id);
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;

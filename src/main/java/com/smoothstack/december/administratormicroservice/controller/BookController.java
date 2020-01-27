@@ -33,8 +33,6 @@ public class BookController {
     @GetMapping("/books")
     public ResponseEntity<List<Book>> readBooks() {
         List<Book> response = bookService.getBooks();
-        logger.debug(response);
-
         ResponseEntity<List<Book>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
@@ -43,7 +41,6 @@ public class BookController {
     @PutMapping("/book/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable long id, @RequestBody Book book) {
         Book response = bookService.setBook(book);
-
         ResponseEntity<Book> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;

@@ -55,10 +55,7 @@ public class BorrowerController {
 
     @DeleteMapping("/borrower/{id}")
     public ResponseEntity<Borrower> deleteBorrower(@PathVariable long id) {
-        Borrower borrower = borrowerService.getBorrower(id);
-        borrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        borrowerService.deleteBorrower(borrower.get());
-
+        borrowerService.deleteBorrower(id);
         ResponseEntity<Borrower> responseEntity = new ResponseEntity<Borrower>((Borrower) null, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;

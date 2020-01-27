@@ -46,11 +46,7 @@ public class GenreController {
 
     @PutMapping("/genre/{id}")
     public ResponseEntity<Genre> updateGenre(@PathVariable long id, @RequestBody Genre genre) {
-        Genre response = genreService.getGenre(id);
-        oldGenre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        response = genreService.setGenre(genre);
-        logger.debug(response);
-
+        Genre response = genreService.setGenre(genre);
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
@@ -58,10 +54,7 @@ public class GenreController {
 
     @DeleteMapping("/genre/{id}")
     public ResponseEntity<Genre> deleteGenre(@PathVariable long id) {
-        Genre genre = genreService.getGenre(id);
-        genre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        genreService.deleteGenre(genre.get());
-
+        genreService.deleteGenre(id);
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;

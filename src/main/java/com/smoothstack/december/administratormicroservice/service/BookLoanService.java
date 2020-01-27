@@ -1,7 +1,6 @@
 package com.smoothstack.december.administratormicroservice.service;
 
 import com.smoothstack.december.administratormicroservice.dao.BookLoanDAO;
-import com.smoothstack.december.administratormicroservice.entity.Author;
 import com.smoothstack.december.administratormicroservice.entity.BookLoan;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,8 @@ public class BookLoanService {
         return bookLoanDAO.save(bookLoan);
     }
 
-    public void deleteBookLoan(long id) {
-        bookLoanDAO.delete(id);
+    public void deleteBookLoan(BookLoan.BookLoanId id) {
+        BookLoan bookLoan = getBookLoan(id);
+        bookLoanDAO.delete(bookLoan);
     }
 }
