@@ -2,9 +2,9 @@ package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
 import com.smoothstack.december.administratormicroservice.entity.Author;
-import com.smoothstack.december.administratormicroservice.entity.Book;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
+import com.smoothstack.december.administratormicroservice.exception.ItemNotFoundException;
 import com.smoothstack.december.administratormicroservice.service.AuthorService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1/lms/administrator-service")
+@RequestMapping(value = "/v1/lms/administrator-service")
 public class AuthorController {
 
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
@@ -30,15 +30,7 @@ public class AuthorController {
     public ResponseEntity<Author> createAuthor(@RequestBody Author author){
         Author response = null;
 
-        try {
-            response = authorService.setAuthor(author);
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
+        response = authorService.setAuthor(author);
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -49,16 +41,23 @@ public class AuthorController {
     public ResponseEntity<List<Author>> readAuthors() {
         List<Author> response = null;
 
-        try {
-            response = authorService.getAuthors();
-            logger.debug(response);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
+        response = authorService.getAuthors();
+        logger.debug(response);
 
         ResponseEntity<List<Author>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
+        logger.debug(responseEntity);
+        return responseEntity;
+    }
+
+    @GetMapping("/author/{id}")
+    public ResponseEntity<Author> readAuthorById(@PathVariable long id) {
+        Optional<Author> response = null;
+
+            response = authorService.getAuthor(id);
+            response.orElseThrow(()->new IllegalRelationReferenceException("oops!"));
+            logger.debug(response.get());
+
+        ResponseEntity<Author> responseEntity = new ResponseEntity<>(response.get(), HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
@@ -67,37 +66,21 @@ public class AuthorController {
     public ResponseEntity<Author> updateAuthor(@PathVariable long id, @RequestBody Author author){
         Author response = null;
 
-        try {
-            Optional<Author> oldAuthor = authorService.getAuthor(id);
-            oldAuthor.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            response = authorService.setAuthor(author);
-            logger.debug(response);
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
+        Optional<Author> oldAuthor = authorService.getAuthor(id);
+        oldAuthor.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        response = authorService.setAuthor(author);
+        logger.debug(response);
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
 
-    @DeleteMapping("/author/{id}")
+    @DeleteMapping(path = "/author/{id}")
     public ResponseEntity<Author> deleteAuthor(@PathVariable long id){
-        try {
-            Optional<Author> author = authorService.getAuthor(id);
-            author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            authorService.deleteAuthor(author.get());
-        } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
-        } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
-        } catch (Exception exception) {
-            logger.error(exception);
-        }
+        Optional<Author> author = authorService.getAuthor(id);
+        author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        authorService.deleteAuthor(author.get());
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);

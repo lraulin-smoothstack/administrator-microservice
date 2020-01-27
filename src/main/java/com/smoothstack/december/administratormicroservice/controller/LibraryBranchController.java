@@ -44,7 +44,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @GetMapping("/libraryBranchs")
+    @GetMapping("/libraryBranches")
     public ResponseEntity<List<LibraryBranch>> readLibraryBranchs() {
         List<LibraryBranch> response = null;
 

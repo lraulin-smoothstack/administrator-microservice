@@ -25,15 +25,17 @@ public class BorrowerController {
     private BorrowerService borrowerService;
 
     @PostMapping("/borrower")
-    public ResponseEntity<Borrower> createBorrower(@RequestBody Borrower borrower){
+    public ResponseEntity<Borrower> createBorrower(@RequestBody Borrower borrower) {
         Borrower response = null;
 
         try {
             response = borrowerService.setBorrower(borrower);
         } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
+                    argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -50,7 +52,8 @@ public class BorrowerController {
         try {
             response = borrowerService.getBorrowers();
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -61,7 +64,7 @@ public class BorrowerController {
     }
 
     @PutMapping("/borrower/{id}")
-    public ResponseEntity<Borrower> updateBorrower(@PathVariable long id, @RequestBody Borrower borrower){
+    public ResponseEntity<Borrower> updateBorrower(@PathVariable long id, @RequestBody Borrower borrower) {
         Borrower response = null;
 
         try {
@@ -69,9 +72,11 @@ public class BorrowerController {
             oldBorrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             response = borrowerService.setBorrower(borrower);
         } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
+                    argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }
@@ -81,15 +86,17 @@ public class BorrowerController {
     }
 
     @DeleteMapping("/borrower/{id}")
-    public ResponseEntity<Borrower> deleteBorrower(@PathVariable long id){
+    public ResponseEntity<Borrower> deleteBorrower(@PathVariable long id) {
         try {
             Optional<Borrower> borrower = borrowerService.getBorrower(id);
             borrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
             borrowerService.deleteBorrower(borrower.get());
         } catch (ArgumentMissingException argumentMissingException) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(), argumentMissingException);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, argumentMissingException.getMessage(),
+                    argumentMissingException);
         } catch (IllegalRelationReferenceException illegalRelationReferenceException) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(), illegalRelationReferenceException);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, illegalRelationReferenceException.getMessage(),
+                    illegalRelationReferenceException);
         } catch (Exception exception) {
             logger.error(exception);
         }

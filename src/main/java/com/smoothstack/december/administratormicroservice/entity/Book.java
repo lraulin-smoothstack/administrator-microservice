@@ -3,7 +3,18 @@ package com.smoothstack.december.administratormicroservice.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -11,14 +22,12 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Min(1)
     private Long id;
 
     @Column
+    @Size(min = 2, max = 100)
     private String title;
-
-    @ManyToMany
-    @JoinTable
-    private Set<Author> authors = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "publisher_id", nullable = false)
@@ -26,10 +35,14 @@ public class Book {
 
     @ManyToMany
     @JoinTable
+    private Set<Author> authors = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable
     private Set<Genre> genres = new HashSet<>();
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -37,7 +50,7 @@ public class Book {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -45,7 +58,7 @@ public class Book {
     }
 
     public Set<Author> getAuthors() {
-        return authors;
+        return this.authors;
     }
 
     public void setAuthors(Set<Author> authors) {
@@ -53,7 +66,7 @@ public class Book {
     }
 
     public Publisher getPublisher() {
-        return publisher;
+        return this.publisher;
     }
 
     public void setPublisher(Publisher publisher) {
@@ -61,10 +74,25 @@ public class Book {
     }
 
     public Set<Genre> getGenres() {
-        return genres;
+        return this.genres;
     }
 
     public void setGenres(Set<Genre> genres) {
         this.genres = genres;
     }
+
+    public void addAuthor(Author author) {
+        this.authors.add(author);
+    }
+
+    public void addGenre(Genre genre) {
+        this.genres.add(genre);
+    }
+
+    @Override
+    public String toString() {
+        return "Book [id=" + this.id + ", title=" + this.title + ", publisher=" + this.publisher + ", authors="
+                + this.authors + ", genres=" + this.genres + "]";
+    }
+
 }
