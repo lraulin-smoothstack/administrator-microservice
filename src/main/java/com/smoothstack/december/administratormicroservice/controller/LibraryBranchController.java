@@ -1,10 +1,7 @@
 package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
-import com.smoothstack.december.administratormicroservice.entity.Author;
 import com.smoothstack.december.administratormicroservice.entity.LibraryBranch;
-import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
-import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import com.smoothstack.december.administratormicroservice.service.LibraryBranchService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,7 +37,7 @@ public class LibraryBranchController {
     public ResponseEntity<List<LibraryBranch>> readLibraryBranchs() {
         List<LibraryBranch> response = null;
 
-        response = libraryBranchService.getLibraryBranchs();
+        response = libraryBranchService.getLibraryBranches();
 
         ResponseEntity<List<LibraryBranch>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);

@@ -20,7 +20,7 @@ import java.util.Optional;
 @Transactional
 public class BookService {
     @Autowired
-    private AuthorDAO authorDAO;
+    private BookDAO authorDAO;
 
     @Autowired
     private BookDAO bookDAO;
@@ -28,15 +28,17 @@ public class BookService {
     @Autowired
     private GenreDAO genreDAO;
 
-    public Optional<Book> getBook(long id) {
-        return bookDAO.findById(id);
+    public Book getBook(long id) {
+        Optional<Book> book = bookDAO.findById(id);
+        book.orElseThrow(()-> new IllegalRelationReferenceException("No book with id " + id));
+        return book.get();
     }
 
     public List<Book> getBooks() {
         return bookDAO.findAll();
     }
 
-    public Book setBook(Book book) {
+    private Book setBook(Book book) {
         if (book.getTitle() == null) {
             throw new ArgumentMissingException("Missing 'title'");
         }
@@ -67,11 +69,15 @@ public class BookService {
                         "The genre with id of " + genre.getId() + " does not exist");
             }
         }
-        if (bookDAO.existsById(book.getId())) {
-            throw new ResourceAlreadyExistsException("A book with this id already exists");
-        }
+
 
         return bookDAO.save(book);
+    }
+
+    public Book createBook(Book book) {
+        if (book.getId() != null) {
+            throw new IllegalArgumentException("A book with this id already exists");
+        }
     }
 
     public void deleteBook(Book book) {

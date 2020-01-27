@@ -1,32 +1,47 @@
 package com.smoothstack.december.administratormicroservice.exception;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @ControllerAdvice()
 public class AdministratorRestExceptionHandler extends ResponseEntityExceptionHandler {
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        List<String> errors = new ArrayList<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.add(error.getField() + ": " + error.getDefaultMessage());
-        }
-        for (ObjectError error :
-                ex.getBindingResult().getGlobalErrors()) {
-            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
-        }
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
 
-        return handleExceptionInternal(ex, apiError, headers, apiError.getStatus(), request);
+    private static final Logger logger = LogManager.getLogger(AdministratorRestExceptionHandler.class);
+
+    @ExceptionHandler(value = ArgumentMissingException.class)
+    public ResponseEntity<ApiError> handleException(ArgumentMissingException exception) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, "Missing argument", exception.getLocalizedMessage());
+        logger.error(apiError);
+        return new ResponseEntity<ApiError>(apiError, apiError.getStatus());
+    }
+
+    @ExceptionHandler(value = IllegalRelationReferenceException.class)
+    public ResponseEntity<ApiError> handleException(IllegalRelationReferenceException exception) {
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, "Reference not found", exception.getLocalizedMessage());
+        logger.error(apiError);
+        return new ResponseEntity<ApiError>(apiError, apiError.getStatus());
+    }
+
+    @ExceptionHandler(value = ResourceAlreadyExistsException.class)
+    public ResponseEntity<ApiError> handleException(ResourceAlreadyExistsException exception) {
+        ApiError apiError = new ApiError(HttpStatus.UNPROCESSABLE_ENTITY, "Item already exists",
+                exception.getLocalizedMessage());
+        logger.error(apiError);
+        return new ResponseEntity<>(apiError, apiError.getStatus());
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<ApiError> handleException(Exception exception) {
+        logger.error(exception.toString());
+        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, "error occurred",
+                exception.getLocalizedMessage());
+        logger.error(apiError);
+        return new ResponseEntity<ApiError>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 }

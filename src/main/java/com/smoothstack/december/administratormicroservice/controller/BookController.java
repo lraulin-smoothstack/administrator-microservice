@@ -49,11 +49,7 @@ public class BookController {
 
     @PutMapping("/book/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable long id, @RequestBody Book book) {
-        Book response = null;
-
-        Optional<Book> oldBook = bookService.getBook(id);
-        oldBook.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        response = bookService.setBook(book);
+        Book response = bookService.setBook(book);
 
         ResponseEntity<Book> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);

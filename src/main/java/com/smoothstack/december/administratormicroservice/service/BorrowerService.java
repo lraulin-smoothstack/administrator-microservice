@@ -4,6 +4,7 @@ import com.smoothstack.december.administratormicroservice.dao.BookLoanDAO;
 import com.smoothstack.december.administratormicroservice.dao.BorrowerDAO;
 import com.smoothstack.december.administratormicroservice.entity.BookLoan;
 import com.smoothstack.december.administratormicroservice.entity.Borrower;
+import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,25 +16,27 @@ import java.util.Optional;
 @Transactional
 public class BorrowerService {
     @Autowired
-    private BorrowerDAO BorrowerDAO;
+    private BorrowerDAO borrowerDAO;
 
     @Autowired
     private BookLoanDAO bookLoanDAO;
 
-    public Optional<Borrower> getBorrower(long id) {
-        return BorrowerDAO.findById(id);
+    public Borrower getBorrower(long id) {
+        Optional<Borrower> borrower = borrowerDAO.findById(id);
+        borrower.orElseThrow(()-> new IllegalRelationReferenceException("No borrower with id " + id));
+        return borrower.get();
     }
 
     public List<Borrower> getBorrowers() {
-        return BorrowerDAO.findAll();
+        return borrowerDAO.findAll();
     }
 
     public Borrower setBorrower(Borrower Borrower) {
-        return BorrowerDAO.save(Borrower);
+        return borrowerDAO.save(Borrower);
     }
 
     public void deleteBorrower(Borrower Borrower) {
-        BorrowerDAO.delete(Borrower);
+        borrowerDAO.delete(Borrower);
     }
 
     public Optional<BookLoan> getBookLoan(BookLoan.BookLoanId id) {

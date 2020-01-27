@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/v1/lms/administrator-service")
+@RequestMapping(value = "/lms/administrator")
 public class AuthorController {
 
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
@@ -51,10 +51,7 @@ public class AuthorController {
 
     @GetMapping("/author/{id}")
     public ResponseEntity<Author> readAuthorById(@PathVariable long id) {
-        Optional<Author> response = null;
-
-        response = authorService.getAuthor(id);
-        response.orElseThrow(() -> new IllegalRelationReferenceException("oops!"));
+        Author response = authorService.getAuthor(id);
         logger.debug(response.get());
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response.get(), HttpStatus.OK);
