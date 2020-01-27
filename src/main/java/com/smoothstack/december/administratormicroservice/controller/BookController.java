@@ -29,7 +29,7 @@ public class BookController {
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         Book response = null;
 
-            response = bookService.setBook(book);
+        response = bookService.setBook(book);
         ResponseEntity<Book> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
@@ -39,8 +39,8 @@ public class BookController {
     public ResponseEntity<List<Book>> readBooks() {
         List<Book> response = null;
 
-            response = bookService.getBooks();
-            logger.debug(response);
+        response = bookService.getBooks();
+        logger.debug(response);
 
         ResponseEntity<List<Book>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -51,9 +51,9 @@ public class BookController {
     public ResponseEntity<Book> updateBook(@PathVariable long id, @RequestBody Book book) {
         Book response = null;
 
-            Optional<Book> oldBook = bookService.getBook(id);
-            oldBook.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            response = bookService.setBook(book);
+        Optional<Book> oldBook = bookService.getBook(id);
+        oldBook.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        response = bookService.setBook(book);
 
         ResponseEntity<Book> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -62,9 +62,9 @@ public class BookController {
 
     @DeleteMapping("/book/{id}")
     public ResponseEntity<Book> deleteBook(@PathVariable long id) {
-            Optional<Book> book = bookService.getBook(id);
-            book.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            bookService.deleteBook(book.get());
+        Optional<Book> book = bookService.getBook(id);
+        book.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        bookService.deleteBook(book.get());
 
         ResponseEntity<Book> responseEntity = new ResponseEntity<>((Book) null, HttpStatus.OK);
         logger.debug(responseEntity);

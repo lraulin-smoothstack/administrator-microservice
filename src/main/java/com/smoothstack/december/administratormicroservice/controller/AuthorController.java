@@ -27,7 +27,7 @@ public class AuthorController {
     private AuthorService authorService;
 
     @PostMapping("/authors")
-    public ResponseEntity<Author> createAuthor(@RequestBody Author author){
+    public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
         Author response = null;
 
         response = authorService.setAuthor(author);
@@ -53,9 +53,9 @@ public class AuthorController {
     public ResponseEntity<Author> readAuthorById(@PathVariable long id) {
         Optional<Author> response = null;
 
-            response = authorService.getAuthor(id);
-            response.orElseThrow(()->new IllegalRelationReferenceException("oops!"));
-            logger.debug(response.get());
+        response = authorService.getAuthor(id);
+        response.orElseThrow(() -> new IllegalRelationReferenceException("oops!"));
+        logger.debug(response.get());
 
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response.get(), HttpStatus.OK);
         logger.debug(responseEntity);
@@ -63,7 +63,7 @@ public class AuthorController {
     }
 
     @PutMapping("/author/{id}")
-    public ResponseEntity<Author> updateAuthor(@PathVariable long id, @RequestBody Author author){
+    public ResponseEntity<Author> updateAuthor(@PathVariable long id, @RequestBody Author author) {
         Author response = null;
 
         Optional<Author> oldAuthor = authorService.getAuthor(id);
@@ -77,7 +77,7 @@ public class AuthorController {
     }
 
     @DeleteMapping(path = "/author/{id}")
-    public ResponseEntity<Author> deleteAuthor(@PathVariable long id){
+    public ResponseEntity<Author> deleteAuthor(@PathVariable long id) {
         Optional<Author> author = authorService.getAuthor(id);
         author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         authorService.deleteAuthor(author.get());

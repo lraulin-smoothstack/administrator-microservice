@@ -26,10 +26,10 @@ public class GenreController {
     private GenreService genreService;
 
     @PostMapping("/genres")
-    public ResponseEntity<Genre> createGenre(@RequestBody Genre genre){
+    public ResponseEntity<Genre> createGenre(@RequestBody Genre genre) {
         Genre response = null;
 
-            response = genreService.setGenre(genre);
+        response = genreService.setGenre(genre);
 
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -40,8 +40,8 @@ public class GenreController {
     public ResponseEntity<List<Genre>> readGenres() {
         List<Genre> response = null;
 
-            response = genreService.getGenres();
-            logger.debug(response);
+        response = genreService.getGenres();
+        logger.debug(response);
 
         ResponseEntity<List<Genre>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -49,13 +49,13 @@ public class GenreController {
     }
 
     @PutMapping("/genre/{id}")
-    public ResponseEntity<Genre> updateGenre(@PathVariable long id, @RequestBody Genre genre){
+    public ResponseEntity<Genre> updateGenre(@PathVariable long id, @RequestBody Genre genre) {
         Genre response = null;
 
-            Optional<Genre> oldGenre = genreService.getGenre(id);
-            oldGenre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            response = genreService.setGenre(genre);
-            logger.debug(response);
+        Optional<Genre> oldGenre = genreService.getGenre(id);
+        oldGenre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        response = genreService.setGenre(genre);
+        logger.debug(response);
 
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
@@ -63,10 +63,10 @@ public class GenreController {
     }
 
     @DeleteMapping("/genre/{id}")
-    public ResponseEntity<Genre> deleteGenre(@PathVariable long id){
-            Optional<Genre> genre = genreService.getGenre(id);
-            genre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            genreService.deleteGenre(genre.get());
+    public ResponseEntity<Genre> deleteGenre(@PathVariable long id) {
+        Optional<Genre> genre = genreService.getGenre(id);
+        genre.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        genreService.deleteGenre(genre.get());
 
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
