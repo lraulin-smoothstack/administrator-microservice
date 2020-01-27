@@ -50,8 +50,8 @@ public class BookLoanController {
     }
 
     @DeleteMapping("/bookLoan")
-    public ResponseEntity<BookLoan> deleteBookLoan(@RequestBody BookLoan bookLoan) {
-        bookLoanService.deleteBookLoan(id));
+    public ResponseEntity<BookLoan> deleteBookLoan(@RequestBody BookLoan.BookLoanId id) {
+        bookLoanService.deleteBookLoan(id);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;

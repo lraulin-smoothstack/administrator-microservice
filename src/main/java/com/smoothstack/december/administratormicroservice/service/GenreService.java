@@ -1,10 +1,8 @@
 package com.smoothstack.december.administratormicroservice.service;
 
 import com.smoothstack.december.administratormicroservice.dao.GenreDAO;
-import com.smoothstack.december.administratormicroservice.entity.Author;
 import com.smoothstack.december.administratormicroservice.entity.Genre;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
-import com.sun.tools.javac.jvm.Gen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

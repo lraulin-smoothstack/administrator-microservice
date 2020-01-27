@@ -43,10 +43,7 @@ public class LibraryBranchController {
     @PutMapping("/libraryBranch/{id}")
     public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable long id,
             @RequestBody LibraryBranch libraryBranch) {
-        LibraryBranch response = libraryBranchService.getLibraryBranch(id);
-        oldLibraryBranch.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        response = libraryBranchService.setLibraryBranch(libraryBranch);
-
+        LibraryBranch response = libraryBranchService.setLibraryBranch(libraryBranch);
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;

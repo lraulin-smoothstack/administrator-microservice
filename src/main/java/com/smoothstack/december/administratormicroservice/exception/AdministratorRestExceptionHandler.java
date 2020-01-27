@@ -21,15 +21,15 @@ public class AdministratorRestExceptionHandler extends ResponseEntityExceptionHa
         return new ResponseEntity<ApiError>(apiError, apiError.getStatus());
     }
 
-    @ExceptionHandler(value = ArgumentMissingException.class)
-    public ResponseEntity<ApiError> handleException(ExtraneousIdException exception) {
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, "Missing argument", exception.getLocalizedMessage());
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<ApiError> handleException(BadRequestException exception) {
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, "Reference not found", exception.getLocalizedMessage());
         logger.error(apiError);
         return new ResponseEntity<ApiError>(apiError, apiError.getStatus());
     }
 
-    @ExceptionHandler(value = BadRequestException.class)
-    public ResponseEntity<ApiError> handleException(BadRequestException exception) {
+    @ExceptionHandler(value = ExtraneousIdException.class)
+    public ResponseEntity<ApiError> handleException(ExtraneousIdException exception) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, "Reference not found", exception.getLocalizedMessage());
         logger.error(apiError);
         return new ResponseEntity<ApiError>(apiError, apiError.getStatus());
@@ -41,6 +41,15 @@ public class AdministratorRestExceptionHandler extends ResponseEntityExceptionHa
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, "Reference not found", exception.getLocalizedMessage());
         logger.error(apiError);
         return new ResponseEntity<ApiError>(apiError, apiError.getStatus());
+    }
+
+    @ExceptionHandler(value = ItemNotFoundException.class)
+    public ResponseEntity<ApiError> handleException(ItemNotFoundException exception) {
+        logger.error(exception.toString());
+        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, "error occurred",
+                exception.getLocalizedMessage());
+        logger.error(apiError);
+        return new ResponseEntity<ApiError>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
     @ExceptionHandler(value = ResourceAlreadyExistsException.class)

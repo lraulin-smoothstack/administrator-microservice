@@ -2,8 +2,6 @@ package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
 import com.smoothstack.december.administratormicroservice.entity.Borrower;
-import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
-import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
 import com.smoothstack.december.administratormicroservice.service.BorrowerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/lms/administrator-service")
@@ -44,10 +40,7 @@ public class BorrowerController {
 
     @PutMapping("/borrower/{id}")
     public ResponseEntity<Borrower> updateBorrower(@PathVariable long id, @RequestBody Borrower borrower) {
-        Borrower response = borrowerService.getBorrower(id);
-        oldBorrower.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        response = borrowerService.setBorrower(borrower);
-
+        Borrower response = borrowerService.setBorrower(borrower);
         ResponseEntity<Borrower> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
