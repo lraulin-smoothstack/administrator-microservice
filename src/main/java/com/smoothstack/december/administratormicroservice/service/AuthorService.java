@@ -3,8 +3,8 @@ package com.smoothstack.december.administratormicroservice.service;
 import com.smoothstack.december.administratormicroservice.dao.AuthorDAO;
 import com.smoothstack.december.administratormicroservice.entity.Author;
 import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
+import com.smoothstack.december.administratormicroservice.exception.ExtraneousIdException;
 import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
-import com.smoothstack.december.administratormicroservice.exception.ResourceAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,14 +28,12 @@ public class AuthorService {
         return authorDAO.findAll();
     }
 
-    private Author setAuthor(Author author) {
+    public Author setAuthor(Author author) {
         return authorDAO.save(author);
     }
 
-    public void deleteAuthor(Author author) {
-        if (author.getId() == null) {
-            throw new ArgumentMissingException("Need id of author to delete.");
-        }
+    public void deleteAuthor(long id) {
+        Author author = getAuthor(id);
         authorDAO.delete(author);
     }
 }

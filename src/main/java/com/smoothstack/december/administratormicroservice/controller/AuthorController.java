@@ -2,9 +2,6 @@ package com.smoothstack.december.administratormicroservice.controller;
 
 import com.smoothstack.december.administratormicroservice.AdministratorMicroserviceApplication;
 import com.smoothstack.december.administratormicroservice.entity.Author;
-import com.smoothstack.december.administratormicroservice.exception.ArgumentMissingException;
-import com.smoothstack.december.administratormicroservice.exception.IllegalRelationReferenceException;
-import com.smoothstack.december.administratormicroservice.exception.ItemNotFoundException;
 import com.smoothstack.december.administratormicroservice.service.AuthorService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,10 +25,7 @@ public class AuthorController {
 
     @PostMapping("/authors")
     public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
-        Author response = null;
-
-        response = authorService.setAuthor(author);
-
+        Author response = authorService.setAuthor(author);
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
@@ -39,11 +33,7 @@ public class AuthorController {
 
     @GetMapping("/authors")
     public ResponseEntity<List<Author>> readAuthors() {
-        List<Author> response = null;
-
-        response = authorService.getAuthors();
-        logger.debug(response);
-
+        List<Author> response = authorService.getAuthors();
         ResponseEntity<List<Author>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
@@ -52,22 +42,14 @@ public class AuthorController {
     @GetMapping("/author/{id}")
     public ResponseEntity<Author> readAuthorById(@PathVariable long id) {
         Author response = authorService.getAuthor(id);
-        logger.debug(response.get());
-
-        ResponseEntity<Author> responseEntity = new ResponseEntity<>(response.get(), HttpStatus.OK);
+        ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
     }
 
     @PutMapping("/author/{id}")
     public ResponseEntity<Author> updateAuthor(@PathVariable long id, @RequestBody Author author) {
-        Author response = null;
-
-        Optional<Author> oldAuthor = authorService.getAuthor(id);
-        oldAuthor.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        response = authorService.setAuthor(author);
-        logger.debug(response);
-
+        Author response = authorService.setAuthor(author);
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
@@ -75,10 +57,7 @@ public class AuthorController {
 
     @DeleteMapping(path = "/author/{id}")
     public ResponseEntity<Author> deleteAuthor(@PathVariable long id) {
-        Optional<Author> author = authorService.getAuthor(id);
-        author.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        authorService.deleteAuthor(author.get());
-
+        authorService.deleteAuthor(id);
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
         logger.debug(responseEntity);
         return responseEntity;
