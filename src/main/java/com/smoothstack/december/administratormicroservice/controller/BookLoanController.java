@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/lms/administrator")
+@RequestMapping(value = "admin")
 public class BookLoanController {
 
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
@@ -21,7 +21,7 @@ public class BookLoanController {
     @Autowired
     private BookLoanService bookLoanService;
 
-    @PostMapping("/bookLoans")
+    @PostMapping("/loans")
     public ResponseEntity<BookLoan> createBookLoan(@RequestBody BookLoan bookLoan) {
         BookLoan response = bookLoanService.setBookLoan(bookLoan);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -29,7 +29,7 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @GetMapping("/bookLoans")
+    @GetMapping("/loans")
     public ResponseEntity<List<BookLoan>> readBookLoans() {
         List<BookLoan> response = bookLoanService.getBookLoans();
         ResponseEntity<List<BookLoan>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -37,7 +37,7 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @GetMapping("/bookLoan/{id}")
+    @GetMapping("/loan/{id}")
     public ResponseEntity<BookLoan> readBookLoanById(@PathVariable long id) {
         BookLoan response = bookLoanService.getBookLoan(id);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -45,7 +45,7 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @PutMapping("/bookLoan")
+    @PutMapping("/loan")
     public ResponseEntity<BookLoan> updateBookLoan(@RequestBody BookLoan bookLoan) {
         BookLoan response = bookLoanService.setBookLoan(bookLoan);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -53,7 +53,7 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @DeleteMapping("/bookLoan")
+    @DeleteMapping("/loan")
     public ResponseEntity<BookLoan> deleteBookLoan(@RequestBody BookLoan.BookLoanId id) {
         bookLoanService.deleteBookLoan(id);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
