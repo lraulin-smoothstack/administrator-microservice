@@ -38,7 +38,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @GetMapping("/branch/{id}")
+    @GetMapping("/branch}")
     public ResponseEntity<LibraryBranch> readLibraryBranchById(@PathVariable long id) {
         LibraryBranch response = libraryBranchService.getLibraryBranch(id);
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
