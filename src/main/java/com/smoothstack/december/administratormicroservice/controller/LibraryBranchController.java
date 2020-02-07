@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/lms/administrator")
+@RequestMapping("admin")
 public class LibraryBranchController {
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
 
     @Autowired
     private LibraryBranchService libraryBranchService;
 
-    @PostMapping("/libraryBranch")
+    @PostMapping("/branch")
     public ResponseEntity<LibraryBranch> createLibraryBranch(@RequestBody LibraryBranch libraryBranch) {
         LibraryBranch response = libraryBranchService.setLibraryBranch(libraryBranch);
 
@@ -29,7 +29,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @GetMapping("/libraryBranches")
+    @GetMapping("/branches")
     public ResponseEntity<List<LibraryBranch>> readLibraryBranchs() {
         List<LibraryBranch> response = libraryBranchService.getLibraryBranches();
 
@@ -38,7 +38,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @GetMapping("/libraryBranch/{id}")
+    @GetMapping("/branch}")
     public ResponseEntity<LibraryBranch> readLibraryBranchById(@PathVariable long id) {
         LibraryBranch response = libraryBranchService.getLibraryBranch(id);
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -46,7 +46,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @PutMapping("/libraryBranch/{id}")
+    @PutMapping("/branch/{id}")
     public ResponseEntity<LibraryBranch> updateLibraryBranch(@PathVariable long id,
                                                              @RequestBody LibraryBranch libraryBranch) {
         LibraryBranch response = libraryBranchService.setLibraryBranch(libraryBranch);
@@ -55,7 +55,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @DeleteMapping("/libraryBranch/{id}")
+    @DeleteMapping("/branch/{id}")
     public ResponseEntity<LibraryBranch> deleteLibraryBranch(@PathVariable long id) {
         libraryBranchService.deleteLibraryBranch(id);
         ResponseEntity<LibraryBranch> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);

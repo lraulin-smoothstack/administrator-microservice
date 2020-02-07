@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/lms/administrator")
+@RequestMapping(value = "/admin")
 public class AuthorController {
 
     private static final Logger logger = LogManager.getLogger(AdministratorMicroserviceApplication.class);
