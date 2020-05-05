@@ -22,7 +22,7 @@ public class PublisherController {
     @Autowired
     private PublisherService publisherService;
 
-    @PostMapping("/publishers")
+    @PostMapping("/publisher")
     public ResponseEntity<Publisher> createPublisher(@RequestBody Publisher publisher) {
         Publisher response = publisherService.setPublisher(publisher);
         ResponseEntity<Publisher> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -30,7 +30,7 @@ public class PublisherController {
         return responseEntity;
     }
 
-    @GetMapping("/publishers")
+    @GetMapping("/publisher")
     public ResponseEntity<List<Publisher>> readPublishers() {
         List<Publisher> response = publisherService.getPublishers();
         ResponseEntity<List<Publisher>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);

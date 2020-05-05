@@ -54,10 +54,10 @@ public class BookService {
             if (author.getId() == null) {
                 throw new ArgumentMissingException("Missing 'authors [{id}]");
             }
-            if (!authorDAO.existsById(author.getId())) {
-                throw new IllegalRelationReferenceException(
-                        "The author with id of " + author.getId() + " does not exist");
-            }
+//            if (!authorDAO.existsById(author.getId())) {
+//                throw new IllegalRelationReferenceException(
+//                        "The author with id of " + author.getId() + " does not exist");
+//            }
         }
         for (Genre genre : book.getGenres()) {
             if (genre.getId() == null) {

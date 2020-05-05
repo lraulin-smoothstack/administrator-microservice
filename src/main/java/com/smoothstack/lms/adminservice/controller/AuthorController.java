@@ -22,7 +22,7 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @PostMapping("/authors")
+    @PostMapping("/author")
     public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
         Author response = authorService.setAuthor(author);
         ResponseEntity<Author> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -30,7 +30,7 @@ public class AuthorController {
         return responseEntity;
     }
 
-    @GetMapping("/authors")
+    @GetMapping("/author")
     public ResponseEntity<List<Author>> readAuthors() {
         List<Author> response = authorService.getAuthors();
         ResponseEntity<List<Author>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);

@@ -22,7 +22,7 @@ public class GenreController {
     @Autowired
     private GenreService genreService;
 
-    @PostMapping("/genres")
+    @PostMapping("/genre")
     public ResponseEntity<Genre> createGenre(@RequestBody Genre genre) {
         Genre response = genreService.setGenre(genre);
         ResponseEntity<Genre> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -30,7 +30,7 @@ public class GenreController {
         return responseEntity;
     }
 
-    @GetMapping("/genres")
+    @GetMapping("/genre")
     public ResponseEntity<List<Genre>> readGenres() {
         List<Genre> response = genreService.getGenres();
         ResponseEntity<List<Genre>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);

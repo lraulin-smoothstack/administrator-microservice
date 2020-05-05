@@ -33,11 +33,8 @@ public class Borrower {
     private String address;
 
     @Column
-    @Pattern(regexp = "(^$|[0-9]{10})")
+//    @Pattern(regexp = "(^$|[0-9]{10})")
     private String phoneNumber;
-
-    @OneToMany(mappedBy = "id.borrower", cascade = CascadeType.ALL)
-    private Set<BookLoan> bookLoans = new HashSet<>();
 
     public Long getId() {
         return this.id;

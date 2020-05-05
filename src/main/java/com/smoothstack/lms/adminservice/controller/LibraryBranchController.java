@@ -30,7 +30,7 @@ public class LibraryBranchController {
         return responseEntity;
     }
 
-    @GetMapping("/branches")
+    @GetMapping("/branch")
     public ResponseEntity<List<LibraryBranch>> readLibraryBranchs() {
         List<LibraryBranch> response = libraryBranchService.getLibraryBranches();
 

@@ -29,7 +29,7 @@ public class BookLoanController {
     @Autowired
     private BookLoanService bookLoanService;
 
-    @PostMapping("/book-loans")
+    @PostMapping("/loan")
     public ResponseEntity<BookLoan> createBookLoan(@RequestBody BookLoan bookLoan) {
         BookLoan response = bookLoanService.setBookLoan(bookLoan);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -37,7 +37,7 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @GetMapping("/book-loans")
+    @GetMapping("/loan")
     public ResponseEntity<List<BookLoan>> readBookLoans() {
         List<BookLoan> response = bookLoanService.getBookLoans();
         ResponseEntity<List<BookLoan>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -45,7 +45,7 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @GetMapping("/book-loans/{id}")
+    @GetMapping("/loan/{id}")
     public ResponseEntity<BookLoan> readBookLoanById(@PathVariable BookLoan.BookLoanId id) {
         BookLoan response = bookLoanService.getBookLoan(id);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -53,7 +53,7 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @PutMapping("/book-loan")
+    @PutMapping("/loan")
     public ResponseEntity<BookLoan> updateBookLoan(@RequestBody BookLoan bookLoan) {
         BookLoan response = bookLoanService.setBookLoan(bookLoan);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -61,7 +61,7 @@ public class BookLoanController {
         return responseEntity;
     }
 
-    @DeleteMapping("/book-loans/{id}")
+    @DeleteMapping("/loan/{id}")
     public ResponseEntity<BookLoan> deleteBookLoan(@PathVariable BookLoan.BookLoanId id) {
         bookLoanService.deleteBookLoan(id);
         ResponseEntity<BookLoan> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);

@@ -21,7 +21,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/books")
+    @PostMapping("/book")
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         Book response = bookService.setBook(book);
         ResponseEntity<Book> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);
@@ -29,7 +29,7 @@ public class BookController {
         return responseEntity;
     }
 
-    @GetMapping("/books")
+    @GetMapping("/book")
     public ResponseEntity<List<Book>> readBooks() {
         List<Book> response = bookService.getBooks();
         ResponseEntity<List<Book>> responseEntity = new ResponseEntity<>(response, HttpStatus.OK);

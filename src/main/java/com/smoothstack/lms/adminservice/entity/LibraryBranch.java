@@ -28,7 +28,7 @@ public class LibraryBranch {
     private String name;
 
     @Column
-    @Size(min = 10, max = 100)
+    @Size(min = 1, max = 100)
     private String address;
 
     @OneToMany(mappedBy = "id.branch", cascade = CascadeType.ALL)

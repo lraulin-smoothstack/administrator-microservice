@@ -33,7 +33,6 @@ public class Publisher {
     private String address;
 
     @Column
-    @Pattern(regexp = "(^$|[0-9]{10})")
     private String phoneNumber;
 
     @OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY)

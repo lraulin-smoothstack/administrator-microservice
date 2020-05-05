@@ -30,7 +30,7 @@ public class BorrowerController {
         return responseEntity;
     }
 
-    @GetMapping("/borrowers")
+    @GetMapping("/borrower")
     public ResponseEntity<List<Borrower>> readBorrowers() {
         List<Borrower> response = borrowerService.getBorrowers();
 
