@@ -29,7 +29,7 @@ public class Publisher {
     private String name;
 
     @Column
-    @Size(min = 10, max = 100)
+    @Size(min = 2, max = 100)
     private String address;
 
     @Column
