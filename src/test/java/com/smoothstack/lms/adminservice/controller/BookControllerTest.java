@@ -79,9 +79,9 @@ public class BookControllerTest {
         assertThat(result.getStatusCodeValue()).isEqualTo(200);
         assertThat(result.getBody().size()).isEqualTo(2);
         assertThat(result.getBody().get(0).getTitle()).isEqualTo(book1.getTitle());
-        assertThat(result.getBody().get(0).getAuthors().contains(book1authors)).isTrue();
+        assertThat(result.getBody().get(0).getAuthors().contains(book1authors.get(0))).isTrue();
         assertThat(result.getBody().get(1).getTitle()).isEqualTo(book2.getTitle());
-        assertThat(result.getBody().get(1).getGenres().contains(book2genres)).isTrue();
+        assertThat(result.getBody().get(1).getGenres().contains(book2genres.get(0))).isTrue();
     }
 
     @Test
