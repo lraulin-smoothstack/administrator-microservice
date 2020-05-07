@@ -37,6 +37,17 @@ public class LibraryBranch {
     @OneToMany(mappedBy = "id.branch", cascade = CascadeType.ALL)
     private Set<BookLoan> bookLoans = new HashSet<>();
 
+    public LibraryBranch() {
+    }
+
+    public LibraryBranch(@Min(1) Long id, @Size(min = 2, max = 100) String name, @Size(min = 1, max = 100) String address, Set<BookCopy> bookCopies, Set<BookLoan> bookLoans) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.bookCopies = bookCopies;
+        this.bookLoans = bookLoans;
+    }
+
     public Long getId() {
         return this.id;
     }

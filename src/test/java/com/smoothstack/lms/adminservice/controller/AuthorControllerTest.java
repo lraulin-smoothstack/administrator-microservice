@@ -1,6 +1,5 @@
 package com.smoothstack.lms.adminservice.controller;
 
-import com.smoothstack.lms.adminservice.dao.AuthorDAO;
 import com.smoothstack.lms.adminservice.entity.Author;
 import com.smoothstack.lms.adminservice.service.AuthorService;
 import static org.assertj.core.api.Assertions.assertThat;

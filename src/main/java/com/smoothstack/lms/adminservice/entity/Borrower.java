@@ -36,6 +36,16 @@ public class Borrower {
 //    @Pattern(regexp = "(^$|[0-9]{10})")
     private String phoneNumber;
 
+    public Borrower() {
+    }
+
+    public Borrower(@Min(1) Long id, @Size(min = 2, max = 50) String name, @Size(min = 10, max = 100) String address, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Long getId() {
         return this.id;
     }
