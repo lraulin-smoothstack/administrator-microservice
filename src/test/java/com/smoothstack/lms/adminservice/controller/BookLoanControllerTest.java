@@ -50,6 +50,7 @@ public class BookLoanControllerTest {
 
         // then
         assertThat(result.getStatusCodeValue()).isEqualTo(200);
+        assertThat(result.getBody().getDueDate()).isEqualTo(bookLoan.getDueDate());
     }
 
     @Test

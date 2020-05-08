@@ -40,12 +40,10 @@ public class LibraryBranch {
     public LibraryBranch() {
     }
 
-    public LibraryBranch(@Min(1) Long id, @Size(min = 2, max = 100) String name, @Size(min = 1, max = 100) String address, Set<BookCopy> bookCopies, Set<BookLoan> bookLoans) {
+    public LibraryBranch(@Min(1) Long id, @Size(min = 2, max = 100) String name, @Size(min = 1, max = 100) String address) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.bookCopies = bookCopies;
-        this.bookLoans = bookLoans;
     }
 
     public Long getId() {

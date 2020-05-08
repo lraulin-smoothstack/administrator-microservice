@@ -44,6 +44,7 @@ public class GenreControllerTest {
 
         // then
         assertThat(result.getStatusCodeValue()).isEqualTo(200);
+        assertThat(result.getBody().getName()).isEqualTo(genre.getName());
     }
 
     @Test

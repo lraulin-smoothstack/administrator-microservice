@@ -44,6 +44,7 @@ public class BorrowerControllerTest {
 
         // then
         assertThat(result.getStatusCodeValue()).isEqualTo(200);
+        assertThat(result.getBody().getName()).isEqualTo(borrower.getName());
     }
 
     @Test

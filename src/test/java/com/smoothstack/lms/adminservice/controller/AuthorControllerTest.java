@@ -44,6 +44,7 @@ public class AuthorControllerTest {
 
         // then
         assertThat(result.getStatusCodeValue()).isEqualTo(200);
+        assertThat(result.getBody().getName()).isEqualTo(author.getName());
     }
 
     @Test

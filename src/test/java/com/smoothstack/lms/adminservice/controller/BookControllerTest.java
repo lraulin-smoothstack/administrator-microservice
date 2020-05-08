@@ -47,11 +47,12 @@ public class BookControllerTest {
         List<Genre> genres = Collections.singletonList(new Genre(1L, "Nonfiction"));
         Publisher publisher = new Publisher(1L, "Penguin", "New York, NY", "555-5555");
         List<Author> authors = Collections.singletonList(new Author(1L, "Douglas Crockford"));
-        Book book = new Book(1L, "How JavaScript Works", publisher, new HashSet<>(authors), new HashSet<>(genres));
+        Book book = new Book(null, "How JavaScript Works", publisher, new HashSet<>(authors), new HashSet<>(genres));
         ResponseEntity<Book> result = bookController.createBook(book);
 
         // then
         assertThat(result.getStatusCodeValue()).isEqualTo(200);
+        assertThat(result.getBody().getTitle()).isEqualTo(book.getTitle());
     }
 
     @Test
