@@ -38,6 +38,16 @@ public class Publisher {
     @OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY)
     private Set<Book> books = new HashSet<>();
 
+    public Publisher() {
+    }
+
+    public Publisher(@Min(1) Long id, @Size(min = 2, max = 100) String name, @Size(min = 2, max = 100) String address, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Long getId() {
         return this.id;
     }
