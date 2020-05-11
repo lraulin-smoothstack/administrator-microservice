@@ -3,18 +3,17 @@ package com.smoothstack.lms.adminservice.service;
 
 import com.smoothstack.lms.adminservice.dao.BorrowerDAO;
 import com.smoothstack.lms.adminservice.entity.Borrower;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.Arrays;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.doNothing;
+import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class BorrowerServiceTest {
@@ -24,56 +23,90 @@ public class BorrowerServiceTest {
     @InjectMocks
     private BorrowerService borrowerService;
 
-    private void testGetBorrower() {
+    @Test
+    public void testGetBorrower() {
         // given
-        Borrower borrower = new Borrower(1L, "Fred Flinstone", "The Town of Bedrock", "555-5555");
-        Mockito.when(this.borrowerDAO.getOne(borrower.getId())).thenReturn(borrower);
+        Borrower borrower = new Borrower(1L, "Fred Flinstone","The Town of Bedrock",  "BED-ROCK");
+        when(borrowerDAO.findById(1L)).thenReturn(Optional.of(borrower));
 
         // when
-        Borrower result = borrowerService.getBorrower(borrower.getId());
+        Borrower returned = borrowerService.getBorrower(1L);
 
         // then
-        assertThat(result.getId()).isEqualTo(borrower.getId());
-        assertThat(result.getName()).isEqualTo(borrower.getName());
+        verify(borrowerDAO, times(1)).findById(1L);
+        verifyNoMoreInteractions(borrowerDAO);
+        assertEquals(borrower, returned);
     }
 
-    private void testGetBorrowers() {
+    @Test
+    public void testGetBorrowers() {
         // given
-        Borrower borrower1 = new Borrower(1L, "Fred Flinstone", "The Town of Bedrock", "555-5555");
-        Borrower borrower2 = new Borrower(1L, "Wilma Flinstone", "The Town of Bedrock", "555-5555");
+        Borrower borrower1 = new Borrower(1L, "Fred Flinstone","The Town of Bedrock",  "BED-ROCK");
+        Borrower borrower2 = new Borrower(1L, "Barnie Rubble","The Town of Bedrock",  "555-RUBL");
         List<Borrower> borrowers = Arrays.asList(borrower1, borrower2);
+        when(borrowerDAO.findAll()).thenReturn(borrowers);
 
         // when
-        List<Borrower> result = borrowerService.getBorrowers();
+        List<Borrower> returned = borrowerService.getBorrowers();
 
         // then
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0).getName()).isEqualTo(borrower1.getName());
-        assertThat(result.get(1).getName()).isEqualTo(borrower2.getName());
+        verify(borrowerDAO, times(1)).findAll();
+        verifyNoMoreInteractions(borrowerDAO);
+        assertEquals(borrowers, returned);
     }
 
-    private void testSetBorrower() {
+    @Test
+    public void testSetBorrowerWithNewBorrower() {
         // given
-        Borrower borrower = new Borrower(1L, "Fred Flinstone", "The Town of Bedrock", "555-5555");
-        Mockito.when(this.borrowerDAO.save(borrower)).thenReturn(borrower);
+        Borrower created = new Borrower(null, "Fred Flinstone","The Town of Bedrock",  "BED-ROCK");
+        Borrower persisted = new Borrower(1L, "Fred Flinstone","The Town of Bedrock",  "BED-ROCK");
+        when(borrowerDAO.save(created)).thenReturn(persisted);
 
         // when
-        Borrower result = borrowerService.setBorrower(borrower);
+        Borrower returned = borrowerService.setBorrower(created);
 
         // then
-        assertThat(result.getId()).isEqualTo(borrower.getId());
-        assertThat(result.getName()).isEqualTo(borrower.getName());
+        ArgumentCaptor<Borrower> borrowerArgument = ArgumentCaptor.forClass(Borrower.class);
+        verify(borrowerDAO, times(1)).save(borrowerArgument.capture());
+        verifyNoMoreInteractions(borrowerDAO);
+        assertBorrower(created, borrowerArgument.getValue());
+        assertEquals(persisted, returned);
     }
 
-    private void testDeleteBorrower() {
+    @Test
+    public void testSetBorrowerWithExistingBorrower() {
         // given
-        Borrower borrower = new Borrower(1L, "Fred Flinstone", "The Town of Bedrock", "555-5555");
-        doNothing().when(borrowerDAO).delete(isA(Borrower.class));
+        Borrower updated = new Borrower(1L, "Fled Frinstone","The Town of Bredlock",  "555-555");
+        when(borrowerDAO.save(updated)).thenReturn(updated);
 
         // when
-        borrowerService.deleteBorrower(borrower.getId());
+        Borrower returned = borrowerService.setBorrower(updated);
 
         // then
-        assertThat(true).isTrue();
+        ArgumentCaptor<Borrower> borrowerArgument = ArgumentCaptor.forClass(Borrower.class);
+        verify(borrowerDAO, times(1)).save(borrowerArgument.capture());
+        verifyNoMoreInteractions(borrowerDAO);
+        assertBorrower(updated, borrowerArgument.getValue());
+        assertEquals(updated, returned);
+    }
+
+    @Test
+    public void testDeleteBorrower() {
+        // given
+        Borrower deleted = new Borrower(1L, "Fred Flinstone","The Town of Bedrock",  "BED-ROCK");
+        when(borrowerDAO.findById(deleted.getId())).thenReturn(Optional.of(deleted));
+
+        // when
+        borrowerService.deleteBorrower(deleted.getId());
+
+        // then
+        verify(borrowerDAO, times(1)).findById(deleted.getId());
+        verify(borrowerDAO, times(1)).delete(deleted);
+        verifyNoMoreInteractions(borrowerDAO);
+    }
+
+    private void assertBorrower(Borrower expected, Borrower actual) {
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getName(), actual.getName());
     }
 }
