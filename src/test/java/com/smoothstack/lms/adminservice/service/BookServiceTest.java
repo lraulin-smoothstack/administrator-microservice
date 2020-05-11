@@ -1,52 +1,54 @@
 package com.smoothstack.lms.adminservice.service;
 
-
 import com.smoothstack.lms.adminservice.dao.BookDAO;
+import com.smoothstack.lms.adminservice.dao.GenreDAO;
 import com.smoothstack.lms.adminservice.entity.Author;
 import com.smoothstack.lms.adminservice.entity.Book;
 import com.smoothstack.lms.adminservice.entity.Genre;
 import com.smoothstack.lms.adminservice.entity.Publisher;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.doNothing;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class BookServiceTest {
     @Mock
     private BookDAO bookDAO;
 
+    @Mock
+    private GenreDAO genreDAO;
+
     @InjectMocks
     private BookService bookService;
 
-    private void testGetBook() {
+    @Test
+    public void testGetBook() {
         // given
         List<Genre> genres = Collections.singletonList(new Genre(1L, "Nonfiction"));
         Publisher publisher = new Publisher(1L, "Penguin", "New York, NY", "555-5555");
         List<Author> authors = Collections.singletonList(new Author(1L, "Douglas Crockford"));
         Book book = new Book(1L, "How JavaScript Works", publisher, new HashSet<>(authors), new HashSet<>(genres));
-
-        Mockito.when(this.bookDAO.getOne(book.getId())).thenReturn(book);
+        when(bookDAO.findById(1L)).thenReturn(Optional.of(book));
 
         // when
-        Book result = bookService.getBook(book.getId());
+        Book returned = bookService.getBook(1L);
 
         // then
-        assertThat(result.getId()).isEqualTo(book.getId());
-        assertThat(result.getTitle()).isEqualTo(book.getTitle());
+        verify(bookDAO, times(1)).findById(1L);
+        verifyNoMoreInteractions(bookDAO);
+        assertEquals(book, returned);
     }
 
-    private void testGetBooks() {
+    @Test
+    public void testGetBooks() {
         // given
         List<Genre> book1genres = Collections.singletonList(new Genre(1L, "Nonfiction"));
         Publisher book1publisher = new Publisher(1L, "Penguin", "New York, NY", "555-5555");
@@ -59,45 +61,85 @@ public class BookServiceTest {
         Book book2 = new Book(1L, "The Cathedral and the Bazaar", book2publisher, new HashSet<>(book2authors), new HashSet<>(book2genres));
 
         List<Book> books = Arrays.asList(book1, book2);
+        when(bookDAO.findAll()).thenReturn(books);
 
         // when
-        List<Book> result = bookService.getBooks();
+        List<Book> returned = bookService.getBooks();
 
         // then
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0).getTitle()).isEqualTo(book1.getTitle());
-        assertThat(result.get(1).getTitle()).isEqualTo(book2.getTitle());
+        verify(bookDAO, times(1)).findAll();
+        verifyNoMoreInteractions(bookDAO);
+        assertEquals(books, returned);
     }
 
-    private void testSetBook() {
+    @Test
+    public void testSetBookWithNewBook() {
         // given
         List<Genre> genres = Collections.singletonList(new Genre(1L, "Nonfiction"));
         Publisher publisher = new Publisher(1L, "Penguin", "New York, NY", "555-5555");
         List<Author> authors = Collections.singletonList(new Author(1L, "Douglas Crockford"));
-        Book book = new Book(1L, "How JavaScript Works", publisher, new HashSet<>(authors), new HashSet<>(genres));
-        Mockito.when(this.bookDAO.save(book)).thenReturn(book);
+        Book created = new Book(null, "How JavaScript Works", publisher, new HashSet<>(authors), new HashSet<>(genres));
+        Book persisted = new Book(1L, "How JavaScript Works", publisher, new HashSet<>(authors), new HashSet<>(genres));
+
+        when(genreDAO.existsById(1L)).thenReturn(true);
+        when(bookDAO.save(created)).thenReturn(persisted);
 
         // when
-        Book result = bookService.setBook(book);
+        Book returned = bookService.setBook(created);
 
         // then
-        assertThat(result.getId()).isEqualTo(book.getId());
-        assertThat(result.getTitle()).isEqualTo(book.getTitle());
+        ArgumentCaptor<Book> bookArgument = ArgumentCaptor.forClass(Book.class);
+        verify(bookDAO, times(1)).save(bookArgument.capture());
+        verifyNoMoreInteractions(bookDAO);
+        assertBook(created, bookArgument.getValue());
+        assertEquals(persisted, returned);
     }
 
-    private void testDeleteBook() {
+    @Test
+    public void testSetBookWithExistingBook() {
         // given
         List<Genre> genres = Collections.singletonList(new Genre(1L, "Nonfiction"));
         Publisher publisher = new Publisher(1L, "Penguin", "New York, NY", "555-5555");
         List<Author> authors = Collections.singletonList(new Author(1L, "Douglas Crockford"));
-        Book book = new Book(1L, "How JavaScript Works", publisher, new HashSet<>(authors), new HashSet<>(genres));
+        Book updated = new Book(1L, "How JavaScript Works", publisher, new HashSet<>(authors), new HashSet<>(genres));
 
-        doNothing().when(bookDAO).delete(isA(Book.class));
+        when(genreDAO.existsById(1L)).thenReturn(true);
+        when(bookDAO.save(updated)).thenReturn(updated);
 
         // when
-        bookService.deleteBook(book.getId());
+        Book returned = bookService.setBook(updated);
 
         // then
-        assertThat(true).isTrue();
+        ArgumentCaptor<Book> bookArgument = ArgumentCaptor.forClass(Book.class);
+        verify(bookDAO, times(1)).save(bookArgument.capture());
+        verifyNoMoreInteractions(bookDAO);
+        assertBook(updated, bookArgument.getValue());
+        assertEquals(updated, returned);
+    }
+
+    @Test
+    public void testDeleteBook() {
+        // given
+        List<Genre> genres = Collections.singletonList(new Genre(1L, "Nonfiction"));
+        Publisher publisher = new Publisher(1L, "Penguin", "New York, NY", "555-5555");
+        List<Author> authors = Collections.singletonList(new Author(1L, "Douglas Crockford"));
+        Book deleted = new Book(1L, "How JavaScript Works", publisher, new HashSet<>(authors), new HashSet<>(genres));
+        when(bookDAO.findById(deleted.getId())).thenReturn(Optional.of(deleted));
+
+        // when
+        bookService.deleteBook(deleted.getId());
+
+        // then
+        verify(bookDAO, times(1)).findById(deleted.getId());
+        verify(bookDAO, times(1)).delete(deleted);
+        verifyNoMoreInteractions(bookDAO);
+    }
+
+    private void assertBook(Book expected, Book actual) {
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getTitle(), actual.getTitle());
+        assertEquals(expected.getAuthors(), actual.getAuthors());
+        assertEquals(expected.getPublisher(), actual.getPublisher());
+        assertEquals(expected.getGenres(), actual.getGenres());
     }
 }
