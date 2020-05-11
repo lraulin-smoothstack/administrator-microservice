@@ -27,7 +27,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class BookLoanControllerTest {
     @InjectMocks

@@ -21,14 +21,13 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class AuthorControllerTest {
     @InjectMocks
     private AuthorController authorController;
 
     @Mock
-    AuthorService authorService;
+    private AuthorService authorService;
 
     @Test
     public void testCreateAuthor() {
