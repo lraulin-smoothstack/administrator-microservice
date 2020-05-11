@@ -30,14 +30,16 @@ public class AuthorServiceTest {
 
     @Test
     public void testGetAuthor() {
+        // given
         Author author = new Author(1L, "Eric Elliot");
         when(authorDAO.findById(1L)).thenReturn(Optional.of(author));
 
+        // when
         Author returned = authorService.getAuthor(1L);
 
+        // then
         verify(authorDAO, times(1)).findById(1L);
         verifyNoMoreInteractions(authorDAO);
-
         assertEquals(author, returned);
     }
 
@@ -59,17 +61,38 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void testSetAuthor() {
+    public void testSetAuthorWithNewAuthor() {
         // given
-        Author author = new Author(1L, "Zed Shaw");
-        when(this.authorDAO.save(author)).thenReturn(author);
+        Author created = new Author(null, "Zed Shaw");
+        Author persisted = new Author(1L, "Zed Shaw");
+        when(authorDAO.save(created)).thenReturn(persisted);
 
         // when
-        Author result = authorService.setAuthor(author);
+        Author returned = authorService.setAuthor(created);
 
         // then
-        assertThat(result.getId()).isEqualTo(author.getId());
-        assertThat(result.getName()).isEqualTo(author.getName());
+        ArgumentCaptor<Author> authorArgument = ArgumentCaptor.forClass(Author.class);
+        verify(authorDAO, times(1)).save(authorArgument.capture());
+        verifyNoMoreInteractions(authorDAO);
+        assertAuthor(created, authorArgument.getValue());
+        assertEquals(persisted, returned);
+    }
+
+    @Test
+    public void testSetAuthorWithExistingAuthor() {
+        // given
+        Author updated = new Author(1L, "Xed Chaw");
+        when(authorDAO.save(updated)).thenReturn(updated);
+
+        // when
+        Author returned = authorService.setAuthor(updated);
+
+        // then
+        ArgumentCaptor<Author> authorArgument = ArgumentCaptor.forClass(Author.class);
+        verify(authorDAO, times(1)).save(authorArgument.capture());
+        verifyNoMoreInteractions(authorDAO);
+        assertAuthor(updated, authorArgument.getValue());
+        assertEquals(updated, returned);
     }
 
     @Test
@@ -85,5 +108,10 @@ public class AuthorServiceTest {
         verify(authorDAO, times(1)).findById(deleted.getId());
         verify(authorDAO, times(1)).delete(deleted);
         verifyNoMoreInteractions(authorDAO);
+    }
+
+    private void assertAuthor(Author expected, Author actual) {
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getName(), actual.getName());
     }
 }
