@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;;
@@ -19,14 +20,17 @@ public class BookLoan {
 
         private static final long serialVersionUID = -8848058513226751763L;
 
+        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "book_id")
         private Book book;
 
+        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "borrower_id")
         private Borrower borrower;
 
+        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "branch_id")
         private LibraryBranch branch;

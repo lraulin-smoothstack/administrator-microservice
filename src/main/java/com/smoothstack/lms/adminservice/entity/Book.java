@@ -20,6 +20,9 @@ public class Book {
     @Size(min = 2, max = 100)
     private String title;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.book")
+    private Set<BookLoan> bookLoans = new HashSet<>();
+
     @ManyToOne
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
