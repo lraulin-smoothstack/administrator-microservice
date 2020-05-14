@@ -1,16 +1,11 @@
 package com.smoothstack.lms.adminservice.entity;
 
+import org.hibernate.annotations.Fetch;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -31,10 +26,10 @@ public class LibraryBranch {
     @Size(min = 1, max = 100)
     private String address;
 
-    @OneToMany(mappedBy = "id.branch", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.branch")
     private Set<BookCopy> bookCopies = new HashSet<>();
 
-    @OneToMany(mappedBy = "id.branch", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.branch")
     private Set<BookLoan> bookLoans = new HashSet<>();
 
     public LibraryBranch() {
