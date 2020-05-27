@@ -22,10 +22,10 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("borrower")
+                .groupName("admin")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.smoothstack.lms.borrowerservice"))
-                .paths(PathSelectors.ant("/lms/borrower/**"))
+                .apis(RequestHandlerSelectors.basePackage("com.smoothstack.lms.adminservice"))
+                .paths(PathSelectors.ant("/lms/admin/**"))
                 .build()
                 .apiInfo(apiInfo())
                 .useDefaultResponseMessages(true);
