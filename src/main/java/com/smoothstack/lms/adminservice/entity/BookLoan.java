@@ -4,14 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;;
@@ -25,15 +20,18 @@ public class BookLoan {
 
         private static final long serialVersionUID = -8848058513226751763L;
 
-        @ManyToOne
+        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "book_id")
         private Book book;
 
-        @ManyToOne
+        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "borrower_id")
         private Borrower borrower;
 
-        @ManyToOne
+        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "branch_id")
         private LibraryBranch branch;
 
